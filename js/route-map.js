@@ -51,6 +51,12 @@
     {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
   ];
+  const segmentSelect = document.getElementById("geoSegmentSelect");
+  const segmentName = document.getElementById("geoSegmentName");
+  const segmentDescription = document.getElementById("geoSegmentDescription");
+  const segmentStart = document.getElementById("geoSegmentStart");
+  const segmentEnd = document.getElementById("geoSegmentEnd");
+  const segmentDistance = document.getElementById("geoSegmentDistance");
   const timelineList = document.getElementById("geoTimelineList");
 
 
@@ -112,6 +118,41 @@
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
     if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}setMotion(!prefersReduced);});
+    const distanceKm=(a,b)=>{
+      const rad=value=>value*Math.PI/180;
+      const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
+      const value=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+      return Math.round(6371*2*Math.atan2(Math.sqrt(value),Math.sqrt(1-value)));
+    };
+    const segmentOptions=()=>{
+      if(!segmentSelect)return;
+      segmentSelect.innerHTML=routeKeys.map(key=>{
+        const route=routes[key];
+        const options=route.ids.slice(0,-1).map((id,index)=>{
+          const next=route.ids[index+1];
+          return '<option value="'+key+':'+index+'">'+places[id].name+' → '+places[next].name+'</option>';
+        }).join("");
+        return '<optgroup label="'+route.name+'">'+options+'</optgroup>';
+      }).join("");
+    };
+    const showSegment=value=>{
+      if(!value||!segmentSelect)return;
+      const [key,indexText]=value.split(":");
+      const route=routes[key],index=Number(indexText);
+      if(!route||!Number.isInteger(index)||index<0||index>=route.ids.length-1)return;
+      const from=places[route.ids[index]],to=places[route.ids[index+1]];
+      const km=distanceKm(from,to);
+      if(segmentName)segmentName.textContent=route.name+" · 第 "+(index+1)+" 段";
+      if(segmentDescription)segmentDescription.textContent=route.period+"。该分段用于阅读相邻代表性地点的地理关系，不表示连续、完整或精确的历史行军轨迹。";
+      if(segmentStart)segmentStart.textContent="起点："+from.name+"（"+from.province+"）";
+      if(segmentEnd)segmentEnd.textContent="终点："+to.name+"（"+to.province+"）";
+      if(segmentDistance)segmentDistance.textContent="球面直线距离约 "+km+" km（非行军里程）";
+      if(status)status.textContent="已选择路线分段："+from.name+" → "+to.name;
+    };
+    segmentOptions();
+    segmentSelect?.addEventListener("change",()=>showSegment(segmentSelect.value));
+    if(segmentSelect?.options.length)showSegment(segmentSelect.value);
+
     let activeRouteKey="all";
     const updateFallback = key => {
       activeRouteKey=key;
