@@ -36,6 +36,21 @@
   };
   const routeKeys = Object.keys(routes);
   const allIds = [...new Set(Object.values(routes).flatMap(r => r.ids))];
+  const timelineEvents = [
+    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
+    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
+    {date:"1935.03",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"tongjiang",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1935.06",title:"红一、红四方面军在懋功地区会师",route:"central",place:"xiaojin",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1935.09（中旬）",title:"红二十五军抵达永坪镇并与陕北红军会师",route:"twentyfive",place:"yanchuan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
+    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1936.06.30",title:"红二、红六军团先后在甘孜地区会合",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.10.09 / 10.22",title:"红一、红四方面军在会宁会师；红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
+  ];
+  const timelineList = document.getElementById("geoTimelineList");
+
 
   { // V6: local SVG coordinate atlas; no CDN, tile server, or network request.
     const bounds = {minLon:99.0,maxLon:116.5,minLat:24.5,maxLat:38.0};
@@ -57,8 +72,34 @@
       if(key==='all'){detailKicker.textContent='ROUTE OVERVIEW / 04 COLUMNS';detailTitle.textContent='四路红军的历史坐标';detailText.textContent='当前为本地经纬度坐标示意图，无需网络即可使用。节点间虚线仅表达地理关系，不是历史行军轨迹。';detailStops.innerHTML='<li>中央红军：于都—遵义—懋功—吴起镇</li><li>红四方面军：川陕根据地—川西—甘孜—会宁</li><li>红二方面军：桑植—黔滇—甘孜—将台堡</li><li>红二十五军：罗山—豫西陕南—永坪镇</li>';}else{const route=routes[key];detailKicker.textContent=`SELECTED ROUTE / ${key.toUpperCase()}`;detailTitle.textContent=route.name;detailText.textContent=route.text+' 当前地图为离线坐标示意。';detailStops.innerHTML=route.stops.map(item=>`<li>${item}</li>`).join('');}
       if(status)status.textContent='离线地图已就绪 · 路线筛选与地点说明均可离线使用';
     };
-    buttons.forEach(btn=>btn.addEventListener('click',()=>updateFallback(btn.dataset.geoRoute)));
-    mapNode.querySelectorAll('[data-fallback-point]').forEach(el=>{const show=()=>{const place=places[el.dataset.fallbackPoint];detailKicker.textContent='PLACE RECORD / COORDINATE';detailTitle.textContent=place.name;detailText.textContent=`${place.province} · ${place.type}。${place.note}`;detailStops.innerHTML=`<li>参考坐标：${place.lat.toFixed(4)}°N，${place.lon.toFixed(4)}°E</li><li>坐标仅定位现代地名，不表示历史驻地或具体事件现场</li>`;};el.addEventListener('click',show);el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();show();}});});
+    const showPlace = id => {
+      const place=places[id];
+      detailKicker.textContent="PLACE RECORD / COORDINATE";
+      detailTitle.textContent=place.name;
+      detailText.textContent=place.province+" · "+place.type+"。"+place.note;
+      detailStops.innerHTML="<li>参考坐标："+place.lat.toFixed(4)+"°N，"+place.lon.toFixed(4)+"°E</li><li>坐标仅定位现代地名，不表示历史驻地或具体事件现场</li>";
+    };
+    buttons.forEach(btn=>btn.addEventListener("click",()=>updateFallback(btn.dataset.geoRoute)));
+    mapNode.querySelectorAll("[data-fallback-point]").forEach(el=>{
+      const show=()=>showPlace(el.dataset.fallbackPoint);
+      el.addEventListener("click",show);
+      el.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();show();}});
+    });
+    if(timelineList){
+      timelineList.querySelectorAll("[data-timeline-index]").forEach(button=>{
+        button.addEventListener("click",()=>{
+          const eventData=timelineEvents[Number(button.dataset.timelineIndex)];
+          if(!eventData)return;
+          updateFallback(eventData.route);
+          showPlace(eventData.place);
+          detailKicker.textContent="HISTORICAL EVENT / "+eventData.date;
+          detailTitle.textContent=eventData.title;
+          detailText.textContent=places[eventData.place].province+" · "+places[eventData.place].type+"。地图节点为现代地名参考坐标，不代表历史事件现场精确位置。";
+          detailStops.innerHTML="<li>所属路线："+routes[eventData.route].name+"</li><li><a href=\""+eventData.source+"\" target=\"_blank\" rel=\"noopener\">查看对应史料来源 ↗</a></li>";
+          timelineList.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
+        });
+      });
+    }
     updateFallback('all');
     return;
   }
