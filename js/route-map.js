@@ -38,18 +38,18 @@
   const routeKeys = Object.keys(routes);
   const allIds = [...new Set(Object.values(routes).flatMap(r => r.ids))];
   const timelineEvents = [
-    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
-    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
-    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
-    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.09.15—16",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html"},
-    {date:"1936.06下旬—07.02",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html"},
-    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
+    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",region:"central",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",region:"eyuwan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
+    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",region:"southwest",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
+    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",region:"sichuan",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
+    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1935.09.15—16",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",region:"southwest",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html"},
+    {date:"1936.06下旬—07.02",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html"},
+    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
   ];
   const segmentSelect = document.getElementById("geoSegmentSelect");
   const segmentName = document.getElementById("geoSegmentName");
@@ -93,17 +93,18 @@
     const terrainLabels = terrainNames.map(t=>{const p=project(t.lon,t.lat);return '<text class="geo-terrain-label" data-terrain-layer x="'+p.x+'" y="'+p.y+'">'+t.name+'</text>';}).join("");
     // Schematic learning regions only; not administrative borders or historical control boundaries.
     const geographicRegions = [
-      {name:"中央苏区（赣南闽西）",color:"#d7a66d",points:[[113.9,24.9],[116.2,25.0],[116.0,27.2],[114.2,27.5],[113.4,26.1]]},
-      {name:"川陕根据地区域",color:"#bd7566",points:[[105.8,30.8],[108.2,31.0],[108.7,33.1],[106.8,33.8],[105.2,32.4]]},
-      {name:"川西高原",color:"#8da6a0",points:[[98.9,29.8],[101.8,29.6],[104.2,31.2],[103.6,34.0],[100.5,34.3],[99.0,32.5]]},
-      {name:"黔滇转战区域",color:"#c2a5c8",points:[[99.4,25.4],[103.7,24.7],[106.4,26.8],[105.4,29.1],[101.8,29.6],[99.6,28.2]]},
-      {name:"陕甘苏区",color:"#d2bd88",points:[[105.0,34.1],[109.2,33.8],[111.6,36.0],[109.5,38.0],[105.7,37.5],[104.8,35.7]]}
+      {name:"中央苏区（赣南闽西）",key:"central",color:"#d7a66d",points:[[113.9,24.9],[116.2,25.0],[116.0,27.2],[114.2,27.5],[113.4,26.1]]},
+      {name:"川陕根据地区域",key:"sichuan",color:"#bd7566",points:[[105.8,30.8],[108.2,31.0],[108.7,33.1],[106.8,33.8],[105.2,32.4]]},
+      {name:"川西高原",key:"western",color:"#8da6a0",points:[[98.9,29.8],[101.8,29.6],[104.2,31.2],[103.6,34.0],[100.5,34.3],[99.0,32.5]]},
+      {name:"黔滇转战区域",key:"southwest",color:"#c2a5c8",points:[[99.4,25.4],[103.7,24.7],[106.4,26.8],[105.4,29.1],[101.8,29.6],[99.6,28.2]]},
+      {name:"陕甘苏区",key:"shaanxi",color:"#d2bd88",points:[[105.0,34.1],[109.2,33.8],[111.6,36.0],[109.5,38.0],[105.7,37.5],[104.8,35.7]]},
+      {name:"鄂豫皖根据地区域",key:"eyuwan",color:"#c9a477",points:[[111.0,30.0],[115.5,30.1],[116.3,32.8],[114.5,34.0],[111.5,33.2]]}
     ];
     const regionMarkup = '<g class="geo-region-layer" data-region-layer>'+geographicRegions.map(region=>{
       const pts=region.points.map(([lon,lat])=>{const p=project(lon,lat);return p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');
       const center=region.points.reduce((a,p)=>[a[0]+p[0]/region.points.length,a[1]+p[1]/region.points.length],[0,0]);
       const label=project(center[0],center[1]);
-      return '<g class="geo-region" data-region-name="'+region.name+'"><polygon class="geo-region-shape" points="'+pts+'" fill="'+region.color+'"/><text class="geo-region-label" x="'+label.x.toFixed(1)+'" y="'+label.y.toFixed(1)+'">'+region.name+'</text></g>';
+      return '<g class="geo-region" data-region-key="'+region.key+'" data-region-name="'+region.name+'"><polygon class="geo-region-shape" points="'+pts+'" fill="'+region.color+'"/><text class="geo-region-label" x="'+label.x.toFixed(1)+'" y="'+label.y.toFixed(1)+'">'+region.name+'</text></g>';
     }).join('')+'</g>';
     const routeMarkup = routeKeys.map(key=>{
       const route=routes[key],pts=route.ids.map(id=>xy(places[id]));
@@ -119,6 +120,18 @@
     const zoomInput=document.getElementById("geoZoom"),zoomValue=document.getElementById("geoZoomValue");
     const zoomIn=document.getElementById("geoZoomIn"),zoomOut=document.getElementById("geoZoomOut");
     const terrainToggle=document.getElementById("geoTerrainToggle"),riverToggle=document.getElementById("geoRiverToggle"),regionToggle=document.getElementById("geoRegionToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
+    const immersiveToggle=document.getElementById("geoImmersiveToggle");
+    let immersiveOn=false;
+    const setImmersiveFocus=regionKey=>{
+      mapNode.querySelectorAll("[data-region-key]").forEach(region=>region.classList.toggle("region-current",!!regionKey&&region.dataset.regionKey===regionKey));
+      mapNode.querySelectorAll("[data-fallback-route]").forEach(route=>route.classList.toggle("route-current",immersiveOn&&!!regionKey&&route.dataset.fallbackRoute===activeRouteKey));
+    };
+    const setImmersiveMode=on=>{
+      immersiveOn=!!on;mapNode.classList.toggle("immersive-mode",immersiveOn);
+      if(immersiveToggle){immersiveToggle.setAttribute("aria-pressed",String(immersiveOn));immersiveToggle.textContent="历史沉浸模式："+(immersiveOn?"开启":"关闭");}
+      const eventData=currentTimelineIndex>=0?timelineEvents[currentTimelineIndex]:null;
+      setImmersiveFocus(immersiveOn&&eventData?eventData.region:null);
+    };
     const setTilt=value=>{const angle=Math.max(0,Math.min(46,Number(value)||0));mapNode.style.setProperty("--map-tilt",angle+"deg");if(tiltInput)tiltInput.value=String(angle);if(tiltValue)tiltValue.textContent=angle+"°";};
     const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||105));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
     if(tiltInput)tiltInput.addEventListener("input",()=>setTilt(tiltInput.value));
@@ -133,6 +146,7 @@
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
     if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}mapNode.classList.remove("regions-muted");if(regionToggle){regionToggle.setAttribute("aria-pressed","true");regionToggle.textContent="地理分区：显示";}setMotion(!prefersReduced);});
+    let activeRouteKey="all";
     const distanceKm=(a,b)=>{
       const rad=value=>value*Math.PI/180;
       const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
@@ -169,7 +183,6 @@
     segmentSelect?.addEventListener("change",()=>showSegment(segmentSelect.value));
     if(segmentSelect?.options.length)showSegment(segmentSelect.value);
 
-    let activeRouteKey="all";
     const updateFallback = key => {
       activeRouteKey=key;
       buttons.forEach(btn=>{const active=btn.dataset.geoRoute===key;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active));});
@@ -215,6 +228,7 @@
       const eventData=timelineEvents[safeIndex];
       if(!eventData)return;
       currentTimelineIndex=safeIndex;
+      if(immersiveOn)setImmersiveFocus(eventData.region);
       const button=timelineList?.querySelector('[data-timeline-index="'+safeIndex+'"]');
       updateFallback(eventData.route);
       showPlace(eventData.place);
@@ -255,6 +269,7 @@
         },playbackDelay());
       });
     }
+    immersiveToggle?.addEventListener("click",()=>setImmersiveMode(!immersiveOn));
     playbackPrev?.addEventListener("click",()=>{stopPlayback();stepTimeline(-1);});
     playbackNext?.addEventListener("click",()=>{stopPlayback();stepTimeline(1);});
     playbackRange?.addEventListener("input",()=>selectTimeline(playbackRange.value));
