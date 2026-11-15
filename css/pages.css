@@ -198,3 +198,7 @@
 @keyframes geoRouteFlow{to{stroke-dashoffset:-68}}
 @media(max-width:760px){.geo-map-tools{padding:12px 14px;gap:8px}.geo-tilt-control{grid-template-columns:auto 34px minmax(70px,1fr);width:100%;font-size:11px}.geo-map-tools button{flex:1;min-height:38px;font-size:10px}.geo-map-legend{padding:9px 14px 12px;gap:9px 14px;font-size:9px}#longMarchMap{perspective:900px}.geo-terrain-svg{transform:perspective(900px) rotateX(var(--map-tilt,28deg)) scale(1.08)}.geo-terrain-label{font-size:15px}.geo-river text{font-size:11px}.fallback-place text{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.geo-terrain-svg,.geo-route-line .geo-route-path{transition:none;animation:none!important}.geo-route-traveler animateMotion{display:none}}
+
+/* V13.1 ensure decorative terrain layers never block interactive map markers */
+.geo-terrain-svg>rect,.geo-grid,.geo-contours,.geo-mountain-ridges,.geo-river,.geo-map-heading,.geo-map-foot,.geo-north-arrow,.geo-route-line{pointer-events:none}
+.geo-terrain-svg .fallback-place{pointer-events:auto}
