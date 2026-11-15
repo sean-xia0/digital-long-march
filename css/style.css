@@ -59,3 +59,34 @@
 button,a{-webkit-tap-highlight-color:transparent}
 @media(max-width:760px){.main-nav a{min-height:42px;display:flex;align-items:center}.menu-toggle{min-width:44px;min-height:44px;justify-content:center;align-items:center}}
 @media print{.noise,.scroll-progress,.site-header,.menu-toggle,.geo-route-controls,.site-footer{display:none!important}body,.subpage{background:#fff!important;color:#222!important}.page-hero{background:#eee!important;color:#222!important;min-height:auto}.page-hero h1,.page-intro h2,.route-record h3,.chronicle-body h3,.person-card h3,.archive-card h3{color:#222!important}.page-subtitle,.page-intro>p:last-child,.route-record p,.chronicle-body p,.archive-card p{color:#444!important}.page-section{padding:24px 0}.geo-map-frame{break-inside:avoid}.geo-map-caution,.source-note{color:#333!important;background:#f5f1e9!important}}
+
+
+/* V7: final polish, responsive ergonomics and accessible interaction */
+:root{color-scheme:dark}
+::selection{background:rgba(198,166,107,.32);color:#fff3df}
+.site-header{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.site-footer>small{max-width:900px;line-height:2}
+.site-footer a:focus-visible,.main-nav a:focus-visible,.button:focus-visible,.detail-link:focus-visible,.route-tab:focus-visible{outline:2px solid #f0d39d;outline-offset:4px}
+button:disabled{cursor:not-allowed;opacity:.55}
+a,button{-webkit-tap-highlight-color:transparent}
+@media(max-width:640px){
+  .hero{min-height:640px;height:100svh}
+  .hero-content{left:7%;right:7%;max-width:unset;top:47%}
+  .hero h1{font-size:clamp(58px,17vw,88px);letter-spacing:8px}
+  .hero-subtitle{font-size:clamp(19px,5vw,25px);letter-spacing:4px}
+  .hero-description{font-size:12px;letter-spacing:1px}
+  .hero-actions{flex-wrap:wrap;gap:15px;margin-top:25px}
+  .hero-side-note{display:none}
+  .hero-bottom{left:7%;right:7%;bottom:20px}
+  .coordinates{display:none}
+  .section-shell{padding-left:22px;padding-right:22px}
+  .section-topline{gap:12px}
+  .section-number{font-size:8px;letter-spacing:1px}
+}
+@media(hover:none){
+  .button:hover,.portal-card:hover,.timeline-card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .site-header{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
