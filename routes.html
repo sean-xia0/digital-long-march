@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="长征路线探索｜数字长征">
   <meta name="twitter:description" content="探索中央红军、红四方面军、红二方面军与红二十五军的代表性路线和地理节点。">
   <link rel="stylesheet" href="css/style.css?v=11">
-  <link rel="stylesheet" href="css/pages.css?v=14.7">
+  <link rel="stylesheet" href="css/pages.css?v=14.8">
 </head>
 <body class="subpage">
   <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -46,7 +46,7 @@
   <div class="section-topline reveal"><span class="eyebrow">ROUTE ATLAS / MULTIPLE COLUMNS</span><span class="section-number">路线 / 02</span></div>
   <div class="page-intro reveal"><p class="overline">不同出发地 · 不同历史轨迹</p><h2>四路红军，<br><em>在地理中交汇。</em></h2><p>地图采用现代地名参考坐标与本地地形艺术层，支持立体视角、山脉河流注记、动态路线和节点信息。所有底图元素本地绘制，断网仍可交互。</p></div>
   <section class="geo-atlas reveal" aria-labelledby="geoAtlasTitle">
-    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.7 · CINEMATIC CAMERA + AUTO FOCUS</span></div>
+    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.8 · DOCUMENTARY CHAPTER PLAYBACK</span></div>
     <div class="geo-route-controls" role="group" aria-label="筛选地图路线">
       <button class="geo-route-btn active" data-geo-route="all" aria-pressed="true">全部路线</button>
       <button class="geo-route-btn" data-geo-route="central" aria-pressed="false">中央红军</button>
@@ -76,7 +76,7 @@
       <div class="geo-segment-result" aria-live="polite"><strong id="geoSegmentName">选择一段路线</strong><p id="geoSegmentDescription">每段仅连接本项目列出的相邻现代地名参考点，不代表真实行军路线、道路里程或具体战斗位置。</p><div class="geo-segment-stats"><span id="geoSegmentStart">起点：—</span><span id="geoSegmentEnd">终点：—</span><span id="geoSegmentDistance">参考直线距离：—</span></div></div>
     </section>
     <section class="geo-timeline" aria-labelledby="geoTimelineTitle">
-      <div class="geo-timeline-head"><div><span class="eyebrow">CHRONOLOGY / 1934—1936</span><h4 id="geoTimelineTitle">沿着时间，读懂四路征程</h4><p>点击播放按时间顺序演示，或手动选择历史节点；地图将同步切换部队、地点和史料。</p></div><span class="geo-timeline-count">史料节点 · 12</span></div>
+      <div class="geo-timeline-head"><div><span class="eyebrow">CHRONOLOGY / 1934—1936</span><h4 id="geoTimelineTitle">沿着时间，读懂四路征程</h4><p>切换纪录片节奏，按章节浏览12个历史节点；镜头随事件自动聚焦，字幕同步呈现。</p></div><span class="geo-timeline-count">史料节点 · 12</span></div>
       <div class="geo-playback" aria-label="长征路线时间播放控制">
         <div class="geo-playback-actions">
           <button type="button" id="geoPlaybackPrev" aria-label="上一个历史事件">上一事件</button>
@@ -91,6 +91,20 @@
         </div>
         <label class="geo-playback-progress" for="geoPlaybackRange"><span>时间进度</span><input id="geoPlaybackRange" type="range" min="0" max="11" step="1" value="0" aria-label="拖动定位历史事件"><output id="geoPlaybackOutput" for="geoPlaybackRange">选择事件 · 共12个</output></label>
         <p id="geoPlaybackStatus" aria-live="polite">点击播放，按历史顺序浏览12个关键事件；也可拖动进度条或手动选择事件。</p>
+      </div>
+      <section class="geo-documentary" aria-label="纪录片章节与历史字幕" aria-live="polite" aria-atomic="true">
+        <div class="geo-documentary-top"><span id="geoChapterEyebrow">CHAPTER 01 / 05</span><span id="geoChapterProgress">第1章 · 2个事件</span></div>
+        <h5 id="geoChapterTitle">出发：踏上征途</h5>
+        <p class="geo-chapter-summary" id="geoChapterSummary">不同部队从各自根据地出发，开启时间与路线各不相同的征程。</p>
+        <div class="geo-documentary-caption"><time id="geoCaptionDate">1934.10</time><div><strong id="geoCaptionTitle">中央红军从于都等地出发</strong><p id="geoCaptionText">1934年10月，中央红军主力从于都等地出发，踏上长征征途。</p></div></div>
+      </section>
+      <div class="geo-chapter-picker">
+        <label for="geoChapterSelect">章节定位
+          <select id="geoChapterSelect" aria-label="选择纪录片章节">
+            <option value="0">第一章 · 出发</option><option value="1">第二章 · 转战</option><option value="2">第三章 · 北上</option><option value="3">第四章 · 会合</option><option value="4">第五章 · 会师</option>
+          </select>
+        </label>
+        <button type="button" id="geoDocumentaryToggle" aria-pressed="false">纪录片节奏：关闭</button>
       </div>
       <div class="geo-timeline-list" id="geoTimelineList" aria-label="长征关键历史节点">
         <button type="button" data-timeline-index="0" aria-pressed="false"><time>1934.10</time><strong>中央红军从于都等地出发</strong><small>中央红军</small></button>
@@ -127,7 +141,7 @@
     <small>本网站为学生网页设计作品。历史叙述以页面列出的公开党史、军史和档案资料为依据；示意图不代表精确地理测绘。图片与档案使用须遵守原发布机构的版权和转载规定。</small>
     <span class="copyright">© 2026 DIGITAL LONG MARCH · STUDENT DESIGN PROJECT</span>
   </footer>
-  <script src="js/route-map.js?v=14.7"></script>
+  <script src="js/route-map.js?v=14.8"></script>
   <script src="js/pages.js"></script>
 </body>
 </html>
