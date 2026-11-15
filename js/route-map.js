@@ -77,7 +77,7 @@
       {name:"大渡河",coords:[[101.1,33.0],[101.8,31.9],[102.3,30.8],[103.0,29.7]]},
       {name:"嘉陵江",coords:[[104.1,34.4],[104.9,33.2],[105.4,32.4],[105.9,31.7],[106.2,30.9]]}
     ];
-    const riverMarkup = rivers.map(r=>{const d=linePath(r.coords);const mid=r.coords[Math.floor(r.coords.length/2)];const p=project(mid[0],mid[1]);return '<g class="geo-river" data-terrain-layer><path d="'+d+'"/><text x="'+(p.x+8)+'" y="'+(p.y-7)+'">'+r.name+' · 示意</text></g>';}).join("");
+    const riverMarkup = rivers.map(r=>{const d=linePath(r.coords);const mid=r.coords[Math.floor(r.coords.length/2)];const p=project(mid[0],mid[1]);return '<g class="geo-river" data-river-layer><path d="'+d+'"/><text x="'+(p.x+8)+'" y="'+(p.y-7)+'">'+r.name+' · 示意</text></g>';}).join("");
     const terrainNames = [
       {name:"横断山地",lon:100.2,lat:29.4},{name:"川西高原",lon:102.4,lat:32.8},
       {name:"四川盆地",lon:105.4,lat:29.6},{name:"云贵高原",lon:103.8,lat:26.3},
@@ -96,15 +96,22 @@
     const mountains = '<g class="geo-mountain-ridges" data-terrain-layer><path d="M90 315 L130 255 L153 281 L185 205 L213 250 L245 180 L276 236 L310 190 L340 255 L370 220 L405 290"/><path d="M235 455 L275 385 L302 412 L342 335 L371 380 L408 315 L443 375 L475 345 L510 410"/><path d="M445 205 L480 145 L506 170 L540 108 L570 154 L606 94 L640 150 L672 118 L710 188"/><path d="M640 430 L678 365 L704 392 L740 320 L772 365 L806 310 L842 365"/></g>';
     mapNode.innerHTML = '<svg id="routeTerrainSvg" class="geo-fallback-map geo-terrain-svg" viewBox="0 0 900 540" role="img" aria-label="长征路线立体地形示意图，包含四路代表性路线、河流、山地、地理网格和历史地点参考坐标"><defs><linearGradient id="terrainBase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46524b"/><stop offset=".48" stop-color="#293b39"/><stop offset="1" stop-color="#1d292b"/></linearGradient><linearGradient id="mountainFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b7a17b" stop-opacity=".72"/><stop offset="1" stop-color="#53615a" stop-opacity=".06"/></linearGradient><pattern id="terrainGrid" width="45" height="45" patternUnits="userSpaceOnUse"><path d="M45 0H0V45" fill="none" stroke="#d1b98e" stroke-opacity=".08"/></pattern><filter id="terrainGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="900" height="540" fill="url(#terrainBase)"/><rect width="900" height="540" fill="url(#terrainGrid)"/><g class="geo-contours" data-terrain-layer>'+terrainContours.map(d=>'<path d="'+d+'"/>').join("")+'</g>'+mountains+'<g class="geo-grid">'+gridLines+'</g>'+riverMarkup+terrainLabels+'<g class="geo-map-heading"><text x="48" y="27">LONG MARCH · TERRAIN ATLAS</text><text x="850" y="27" text-anchor="end">99°E—116.5°E / 24.5°N—38°N</text></g><g class="geo-north-arrow"><path d="M835 75V116 M835 75L824 94 M835 75L846 94"/><text x="835" y="66" text-anchor="middle">N</text></g>'+routeMarkup+labels+'<g class="geo-map-foot"><text x="48" y="520">现代地名参考坐标 · 河流/山脉为地理示意 · 非精确历史轨迹</text><text x="850" y="520" text-anchor="end">© OpenStreetMap contributors</text></g></svg>';
     const tiltInput=document.getElementById("geoTilt"),tiltValue=document.getElementById("geoTiltValue");
-    const terrainToggle=document.getElementById("geoTerrainToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
+    const zoomInput=document.getElementById("geoZoom"),zoomValue=document.getElementById("geoZoomValue");
+    const zoomIn=document.getElementById("geoZoomIn"),zoomOut=document.getElementById("geoZoomOut");
+    const terrainToggle=document.getElementById("geoTerrainToggle"),riverToggle=document.getElementById("geoRiverToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
     const setTilt=value=>{const angle=Math.max(0,Math.min(46,Number(value)||0));mapNode.style.setProperty("--map-tilt",angle+"deg");if(tiltInput)tiltInput.value=String(angle);if(tiltValue)tiltValue.textContent=angle+"°";};
+    const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||104));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
     if(tiltInput)tiltInput.addEventListener("input",()=>setTilt(tiltInput.value));
+    if(zoomInput)zoomInput.addEventListener("input",()=>setZoom(zoomInput.value));
+    zoomIn?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||104)+10));
+    zoomOut?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||104)-10));
     if(terrainToggle)terrainToggle.addEventListener("click",()=>{const on=terrainToggle.getAttribute("aria-pressed")!=="true";terrainToggle.setAttribute("aria-pressed",String(on));terrainToggle.textContent="地形注记："+(on?"显示":"隐藏");mapNode.classList.toggle("terrain-muted",!on);});
+    if(riverToggle)riverToggle.addEventListener("click",()=>{const on=riverToggle.getAttribute("aria-pressed")!=="true";riverToggle.setAttribute("aria-pressed",String(on));riverToggle.textContent="河流图层："+(on?"显示":"隐藏");mapNode.classList.toggle("rivers-muted",!on);});
     const prefersReduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let motionOn=!prefersReduced;
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
-    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);mapNode.classList.remove("terrain-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}setMotion(!prefersReduced);});
+    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(104);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}setMotion(!prefersReduced);});
     let activeRouteKey="all";
     const updateFallback = key => {
       activeRouteKey=key;
