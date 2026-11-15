@@ -72,3 +72,25 @@
 - 立体效果由 CSS 透视变换实现，地图仍为二维 SVG 数据层，不是可测量的三维地形模型。
 - 河流线、山脉阴影和地貌文字仅用于地理认知辅助，非精确测绘或 DEM 数据。
 - 主要地理单元与河流水系参考：[Spatiotemporal evolution effects of habitat quality with the conservation policies in the Upper Yangtze River, China](https://doi.org/10.1038/s41598-025-89565-1)。
+
+
+## V15.0：十二幅原创历程场景插画（2026-11-16）
+
+本版新增12幅本项目原创 SVG 场景艺术复原，分别对应路线探索页的12个历史节点。插画以群山、河流、城镇、道路、古堡和人物剪影构成历史氛围，不复制历史照片、不描绘可识别的真实人物，也不作为史实证据。
+
+| 文件 | 对应节点 |
+|---|---|
+| assets/milestone-01-yudu.svg | 中央红军于都出发 |
+| assets/milestone-02-hejiachong.svg | 红二十五军何家冲出发 |
+| assets/milestone-03-zunyi.svg | 遵义会议 |
+| assets/milestone-04-jialing.svg | 强渡嘉陵江 |
+| assets/milestone-05-maogong.svg | 懋功会师 |
+| assets/milestone-06-yongping.svg | 永坪会师 |
+| assets/milestone-07-wuqi.svg | 到达吴起镇 |
+| assets/milestone-08-sangzhi.svg | 桑植出发 |
+| assets/milestone-09-ganzi.svg | 甘孜会合 |
+| assets/milestone-10-formation.svg | 红二方面军正式组成 |
+| assets/milestone-11-huining.svg | 会宁会师 |
+| assets/milestone-12-jiangtaibao.svg | 将台堡会师 |
+
+所有图像均为本项目原创矢量绘制，使用 SVG 源文件随仓库发布，无第三方图像依赖。页面图注统一标明“原创历史场景艺术复原／非历史照片”。不得将这些插画作为史实照片或档案材料提交。
