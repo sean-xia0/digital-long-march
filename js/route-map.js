@@ -38,18 +38,25 @@
   const routeKeys = Object.keys(routes);
   const allIds = [...new Set(Object.values(routes).flatMap(r => r.ids))];
   const timelineEvents = [
-    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",region:"central",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",region:"eyuwan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
-    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",region:"southwest",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
-    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",region:"sichuan",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
-    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.09.15—16",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",region:"southwest",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html"},
-    {date:"1936.06下旬—07.02",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html"},
-    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
+    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",region:"central",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1934年10月，中央红军主力从于都等地出发，踏上长征征途。地图标记为现代于都县参考坐标。"},
+    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",region:"eyuwan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html",caption:"1934年11月16日，红二十五军从河南罗山县何家冲出发，开始独立转移。"},
+    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",region:"southwest",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html",caption:"遵义会议在长征途中召开，成为中国共产党和红军历史上的重要转折节点。"},
+    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",region:"sichuan",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html",caption:"1935年3月28日，红四方面军强渡嘉陵江，开始战略转移。此处定位现代红军渡纪念地参考坐标。"},
+    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年6月12日，先头部队在达维会师；6月18日，中央红军主力抵达懋功。两个日期对应不同阶段。"},
+    {date:"1935.09.15—16",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"红二十五军于9月15日抵达永坪镇，9月16日与红二十六、红二十七军正式会师。"},
+    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年10月19日，中央红军主力到达陕北吴起镇，中央红军长征的重要阶段由此告一段落。"},
+    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",region:"southwest",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html",caption:"1935年11月19日，红二、红六军团从湖南桑植刘家坪等地出发，开始新的战略转移。"},
+    {date:"1936.06下旬—07.02",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html",caption:"1936年6月下旬至7月2日，红二、红六军团在甘孜地区与红四方面军会合。"},
+    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年7月5日，红二方面军正式组成，部队编制进入新的阶段。"},
+    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月9日，红一、红四方面军在甘肃会宁会师。"},
+    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月22日，红一、红二方面军在宁夏将台堡会师。会宁与将台堡是两次不同的会师事件。"}
+  ];
+  const documentaryChapters = [
+    {title:"出发：踏上征途",summary:"中央红军与红二十五军从各自出发地启程。不同部队有各自的时间线与行进方向。",start:0,end:1},
+    {title:"转战：在行进中寻找方向",summary:"遵义会议、强渡嘉陵江与懋功会师，呈现不同部队在1935年经历的关键节点。",start:2,end:4},
+    {title:"北上：走向陕北",summary:"红二十五军在永坪会师，中央红军主力到达吴起镇，两条历史进程在陕北交汇。",start:5,end:6},
+    {title:"会合：跨越山河",summary:"红二、红六军团从桑植出发，在甘孜地区与红四方面军会合，随后红二方面军正式组成。",start:7,end:9},
+    {title:"会师：汇成胜利",summary:"1936年10月，会宁与将台堡先后迎来不同部队会师，长征胜利的历史进程走向完成。",start:10,end:11}
   ];
   const segmentSelect = document.getElementById("geoSegmentSelect");
   const segmentName = document.getElementById("geoSegmentName");
@@ -239,12 +246,35 @@
     const playbackOutput=document.getElementById("geoPlaybackOutput");
     const playbackSpeed=document.getElementById("geoPlaybackSpeed");
     const playbackStatus=document.getElementById("geoPlaybackStatus");
+    const chapterSelect=document.getElementById("geoChapterSelect");
+    const documentaryToggle=document.getElementById("geoDocumentaryToggle");
+    const chapterEyebrow=document.getElementById("geoChapterEyebrow");
+    const chapterProgress=document.getElementById("geoChapterProgress");
+    const chapterTitle=document.getElementById("geoChapterTitle");
+    const chapterSummary=document.getElementById("geoChapterSummary");
+    const captionDate=document.getElementById("geoCaptionDate");
+    const captionTitle=document.getElementById("geoCaptionTitle");
+    const captionText=document.getElementById("geoCaptionText");
+    let documentaryMode=false;
     let currentTimelineIndex=-1;
     let playbackTimer=null;
-    const playbackDelay=()=>Number(playbackSpeed?.value||2800);
+    const playbackDelay=()=>Math.round(Number(playbackSpeed?.value||2800)*(documentaryMode?1.8:1));
     const stopPlayback=()=>{
       if(playbackTimer!==null){window.clearInterval(playbackTimer);playbackTimer=null;}
       if(playbackPlay){playbackPlay.textContent="▶ 播放";}
+    };
+    const updateDocumentaryCard=(index,eventData)=>{
+      const chapterIndex=documentaryChapters.findIndex(chapter=>index>=chapter.start&&index<=chapter.end);
+      const chapter=documentaryChapters[chapterIndex];
+      if(!chapter)return;
+      if(chapterEyebrow)chapterEyebrow.textContent="CHAPTER "+String(chapterIndex+1).padStart(2,"0")+" / "+documentaryChapters.length;
+      if(chapterProgress)chapterProgress.textContent="第"+(chapterIndex+1)+"章 · "+(index-chapter.start+1)+"/"+(chapter.end-chapter.start+1)+" 个事件";
+      if(chapterTitle)chapterTitle.textContent=chapter.title;
+      if(chapterSummary)chapterSummary.textContent=chapter.summary;
+      if(captionDate)captionDate.textContent=eventData.date;
+      if(captionTitle)captionTitle.textContent=eventData.title;
+      if(captionText)captionText.textContent=eventData.caption||eventData.title;
+      if(chapterSelect)chapterSelect.value=String(chapterIndex);
     };
     const selectTimeline=index=>{
       const safeIndex=Math.max(0,Math.min(timelineEvents.length-1,Number(index)));
@@ -262,6 +292,7 @@
       detailStops.innerHTML='<li>所属路线：'+routes[eventData.route].name+'</li><li><a href="'+eventData.source+'" target="_blank" rel="noopener">查看对应史料来源 ↗</a></li>';
       timelineList?.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
       mapNode.querySelectorAll("[data-fallback-point]").forEach(item=>item.classList.toggle("event-current",item.dataset.fallbackPoint===eventData.place));
+      updateDocumentaryCard(safeIndex,eventData);
       if(playbackRange)playbackRange.value=String(safeIndex);
       if(playbackOutput)playbackOutput.textContent=(safeIndex+1)+" / "+timelineEvents.length+" · "+eventData.date;
       if(playbackStatus)playbackStatus.textContent="正在查看第 "+(safeIndex+1)+" 个事件："+eventData.title;
@@ -294,6 +325,17 @@
       });
     }
     immersiveToggle?.addEventListener("click",()=>setImmersiveMode(!immersiveOn));
+    chapterSelect?.addEventListener("change",()=>{
+      stopPlayback();
+      const chapter=documentaryChapters[Number(chapterSelect.value)];
+      if(chapter)selectTimeline(chapter.start);
+    });
+    documentaryToggle?.addEventListener("click",()=>{
+      documentaryMode=!documentaryMode;
+      if(documentaryToggle){documentaryToggle.setAttribute("aria-pressed",String(documentaryMode));documentaryToggle.textContent="纪录片节奏："+(documentaryMode?"开启":"关闭");}
+      if(playbackTimer!==null){stopPlayback();playbackPlay?.click();}
+      if(playbackStatus)playbackStatus.textContent=documentaryMode?"纪录片节奏已开启：镜头停留更久，字幕阅读时间更充足。":"已恢复标准时间播放节奏。";
+    });
     playbackPrev?.addEventListener("click",()=>{stopPlayback();stepTimeline(-1);});
     playbackNext?.addEventListener("click",()=>{stopPlayback();stepTimeline(1);});
     playbackRange?.addEventListener("input",()=>selectTimeline(playbackRange.value));
