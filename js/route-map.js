@@ -132,21 +132,72 @@
       el.addEventListener("click",show);
       el.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();show();}});
     });
+    const playbackPlay=document.getElementById("geoPlaybackPlay");
+    const playbackPrev=document.getElementById("geoPlaybackPrev");
+    const playbackNext=document.getElementById("geoPlaybackNext");
+    const playbackRange=document.getElementById("geoPlaybackRange");
+    const playbackOutput=document.getElementById("geoPlaybackOutput");
+    const playbackSpeed=document.getElementById("geoPlaybackSpeed");
+    const playbackStatus=document.getElementById("geoPlaybackStatus");
+    let currentTimelineIndex=-1;
+    let playbackTimer=null;
+    const playbackDelay=()=>Number(playbackSpeed?.value||2800);
+    const stopPlayback=()=>{
+      if(playbackTimer!==null){window.clearInterval(playbackTimer);playbackTimer=null;}
+      if(playbackPlay){playbackPlay.textContent="▶ 播放";playbackPlay.setAttribute("aria-pressed","false");}
+    };
+    const selectTimeline=index=>{
+      const safeIndex=Math.max(0,Math.min(timelineEvents.length-1,Number(index)));
+      const eventData=timelineEvents[safeIndex];
+      if(!eventData)return;
+      currentTimelineIndex=safeIndex;
+      const button=timelineList?.querySelector('[data-timeline-index="'+safeIndex+'"]');
+      updateFallback(eventData.route);
+      showPlace(eventData.place);
+      detailKicker.textContent="HISTORICAL EVENT / "+eventData.date;
+      detailTitle.textContent=eventData.title;
+      detailText.textContent=places[eventData.place].province+" · "+places[eventData.place].type+"。地图节点为现代地名参考坐标，不代表历史事件现场精确位置。";
+      detailStops.innerHTML="<li>所属路线："+routes[eventData.route].name+"</li><li><a href=\\""+eventData.source+"\\" target=\\"_blank\\" rel=\\"noopener\\">查看对应史料来源 ↗</a></li>";
+      timelineList?.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
+      mapNode.querySelectorAll("[data-fallback-point]").forEach(item=>item.classList.toggle("event-current",item.dataset.fallbackPoint===eventData.place));
+      if(playbackRange)playbackRange.value=String(safeIndex);
+      if(playbackOutput)playbackOutput.textContent=(safeIndex+1)+" / "+timelineEvents.length+" · "+eventData.date;
+      if(playbackStatus)playbackStatus.textContent="正在查看第 "+(safeIndex+1)+" 个事件："+eventData.title;
+    };
+    const stepTimeline=direction=>{
+      const next=currentTimelineIndex<0?(direction>0?0:timelineEvents.length-1):currentTimelineIndex+direction;
+      if(next<0||next>=timelineEvents.length){stopPlayback();return;}
+      selectTimeline(next);
+    };
     if(timelineList){
       timelineList.querySelectorAll("[data-timeline-index]").forEach(button=>{
         button.addEventListener("click",()=>{
-          const eventData=timelineEvents[Number(button.dataset.timelineIndex)];
-          if(!eventData)return;
-          updateFallback(eventData.route);
-          showPlace(eventData.place);
-          detailKicker.textContent="HISTORICAL EVENT / "+eventData.date;
-          detailTitle.textContent=eventData.title;
-          detailText.textContent=places[eventData.place].province+" · "+places[eventData.place].type+"。地图节点为现代地名参考坐标，不代表历史事件现场精确位置。";
-          detailStops.innerHTML="<li>所属路线："+routes[eventData.route].name+"</li><li><a href=\""+eventData.source+"\" target=\"_blank\" rel=\"noopener\">查看对应史料来源 ↗</a></li>";
-          timelineList.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
+          stopPlayback();
+          selectTimeline(Number(button.dataset.timelineIndex));
+          if(playbackStatus)playbackStatus.textContent="已手动定位历史事件；点击播放可继续自动演示。";
         });
       });
     }
+    if(playbackPlay){
+      playbackPlay.addEventListener("click",()=>{
+        if(playbackTimer!==null){stopPlayback();if(playbackStatus)playbackStatus.textContent="播放已暂停";return;}
+        if(currentTimelineIndex<0||currentTimelineIndex>=timelineEvents.length-1)selectTimeline(0);
+        playbackPlay.textContent="Ⅱ 暂停";
+        playbackPlay.setAttribute("aria-pressed","true");
+        if(playbackStatus)playbackStatus.textContent="时间播放进行中";
+        playbackTimer=window.setInterval(()=>{
+          if(currentTimelineIndex>=timelineEvents.length-1){stopPlayback();if(playbackStatus)playbackStatus.textContent="演示完成";return;}
+          selectTimeline(currentTimelineIndex+1);
+          if(currentTimelineIndex===timelineEvents.length-1){stopPlayback();if(playbackStatus)playbackStatus.textContent="演示完成";}
+        },playbackDelay());
+      });
+    }
+    playbackPrev?.addEventListener("click",()=>{stopPlayback();stepTimeline(-1);});
+    playbackNext?.addEventListener("click",()=>{stopPlayback();stepTimeline(1);});
+    playbackRange?.addEventListener("input",()=>selectTimeline(playbackRange.value));
+    playbackSpeed?.addEventListener("change",()=>{
+      if(playbackTimer!==null){stopPlayback();playbackPlay?.click();}
+    });
     updateFallback('all');
     return;
   }
