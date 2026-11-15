@@ -4,7 +4,7 @@
 - 在线展示：https://sean-xia0.github.io/digital-long-march/
 - 源代码仓库：https://github.com/sean-xia0/digital-long-march
 - 路线探索页：https://sean-xia0.github.io/digital-long-march/routes.html
-- 当前代码版本：V15.0（以本次部署与线上验收结果确认公开版本）（GitHub Pages 工作流 #135 成功；全屏纪录片演示模式已上线并完成线上浏览器核心流程验收）
+- 当前线上版本：V15.0（公开路线页已确认；12节点插画与纪录片主视觉联动通过线上浏览器验收）（GitHub Pages 工作流 #135 成功；全屏纪录片演示模式已上线并完成线上浏览器核心流程验收）
 
 ## 推荐提交组合
 1. 在线作品链接（若主办方接受在线作品）。
