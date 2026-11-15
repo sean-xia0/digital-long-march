@@ -90,3 +90,9 @@ a,button{-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:auto}
   .site-header{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
+
+/* V11 original hero illustration */
+.hero-backdrop{overflow:hidden}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.58;mix-blend-mode:screen;filter:saturate(.78) contrast(1.08)}
+.hero-backdrop .mountain,.hero-backdrop .ridge,.hero-backdrop .flag-scene{opacity:.18}
+@media(max-width:760px){.hero-art{opacity:.48}}
