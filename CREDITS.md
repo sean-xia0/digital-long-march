@@ -1,4 +1,4 @@
-# 素材、字体与许可说明（V11 图片增强版）
+# 素材、字体与许可说明（V13 立体路线地图增强版）
 
 本项目优先采用 CSS、SVG、文字排版和原生交互，不把来源不明或授权不明的网络图片直接放入作品。
 
@@ -65,3 +65,4 @@
 | 哈达铺会议旧址：毛泽东、张闻天住室 | N509FZ / 2026-02-02 | https://commons.wikimedia.org/wiki/File:Former_residence_of_Mao_Zedong_and_Zhang_Wentian_at_Hadapu_(20260202170407).jpg | CC BY-SA 4.0 | 原图展示，署名摄影者并链接原始文件与许可 |
 
 许可文本：https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans 。两张照片未作裁剪或调色处理。图片说明明确区分“当代实物/旧址摄影”与“历史现场照片”，避免误导。页面直接通过 Wikimedia Commons 文件页加载原图缩放版本；若目标环境无法访问 Commons，图片可能无法显示，后续可在确认离线打包要求后再考虑合规本地化。
+\n\n## V13 地图补充说明\n\n- 立体效果由 CSS 透视变换实现，地图仍为二维 SVG 数据层，不是可测量的三维地形模型。\n- 河流线、山脉阴影和地貌文字仅用于地理认知辅助，非精确测绘或 DEM 数据。\n- 主要地理单元与河流水系参考：[Spatiotemporal evolution effects of habitat quality with the conservation policies in the Upper Yangtze River, China](https://doi.org/10.1038/s41598-025-89565-1)。\n

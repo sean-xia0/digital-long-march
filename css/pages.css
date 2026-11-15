@@ -207,3 +207,6 @@
 .geo-place-hit{fill:transparent;pointer-events:all;cursor:pointer}
 .geo-place-dot{r:6.5}
 @media(max-width:760px){.geo-place-dot{r:8}}
+
+/* V13.3 expanded mobile map marker hit target */
+.geo-place-hit{fill:transparent;pointer-events:all;cursor:pointer}
