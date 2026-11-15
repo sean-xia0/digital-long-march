@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="长征路线探索｜数字长征">
   <meta name="twitter:description" content="探索中央红军、红四方面军、红二方面军与红二十五军的代表性路线和地理节点。">
   <link rel="stylesheet" href="css/style.css?v=11">
-  <link rel="stylesheet" href="css/pages.css?v=14.8">
+  <link rel="stylesheet" href="css/pages.css?v=14.9">
 </head>
 <body class="subpage">
   <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -46,7 +46,7 @@
   <div class="section-topline reveal"><span class="eyebrow">ROUTE ATLAS / MULTIPLE COLUMNS</span><span class="section-number">路线 / 02</span></div>
   <div class="page-intro reveal"><p class="overline">不同出发地 · 不同历史轨迹</p><h2>四路红军，<br><em>在地理中交汇。</em></h2><p>地图采用现代地名参考坐标与本地地形艺术层，支持立体视角、山脉河流注记、动态路线和节点信息。所有底图元素本地绘制，断网仍可交互。</p></div>
   <section class="geo-atlas reveal" aria-labelledby="geoAtlasTitle">
-    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.8 · DOCUMENTARY CHAPTER PLAYBACK</span></div>
+    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.9 · DOCUMENTARY CHAPTER PLAYBACK</span></div>
     <div class="geo-route-controls" role="group" aria-label="筛选地图路线">
       <button class="geo-route-btn active" data-geo-route="all" aria-pressed="true">全部路线</button>
       <button class="geo-route-btn" data-geo-route="central" aria-pressed="false">中央红军</button>
@@ -105,6 +105,7 @@
           </select>
         </label>
         <button type="button" id="geoDocumentaryToggle" aria-pressed="false">纪录片节奏：关闭</button>
+        <button type="button" id="geoCinemaOpen" class="geo-cinema-launch">▶ 全屏纪录片演示</button>
       </div>
       <div class="geo-timeline-list" id="geoTimelineList" aria-label="长征关键历史节点">
         <button type="button" data-timeline-index="0" aria-pressed="false"><time>1934.10</time><strong>中央红军从于都等地出发</strong><small>中央红军</small></button>
@@ -122,6 +123,30 @@
       </div>
       <p class="geo-timeline-note">注：红二十五军于1935年9月15日抵达永坪镇，9月16日与红二十六、红二十七军正式会师；两日分别对应抵达与会师，不是史料日期冲突。会宁、将台堡两次会师分别列出。</p>
     </section>
+      <div class="geo-cinema-overlay" id="geoCinemaOverlay" role="dialog" aria-modal="true" aria-label="长征全屏纪录片演示" aria-hidden="true" hidden>
+        <div class="geo-cinema-backdrop" aria-hidden="true"></div>
+        <div class="geo-cinema-frame">
+          <header class="geo-cinema-header"><span>数字长征 · 永不熄灭的征途</span><button type="button" id="geoCinemaClose" aria-label="退出全屏演示">退出演示 ×</button></header>
+          <main class="geo-cinema-main">
+            <p class="geo-cinema-kicker" id="geoCinemaKicker">DOCUMENTARY PRESENTATION · 1934—1936</p>
+            <p class="geo-cinema-chapter" id="geoCinemaChapter">第一章 · 出发</p>
+            <h2 id="geoCinemaTitle">踏上征途</h2>
+            <p class="geo-cinema-summary" id="geoCinemaSummary">沿着历史节点，观看四路红军各自的长征历程。</p>
+            <div class="geo-cinema-caption"><time id="geoCinemaDate">1934.10</time><div><strong id="geoCinemaEvent">中央红军从于都等地出发</strong><p id="geoCinemaText">1934年10月，中央红军主力从于都等地出发，踏上长征征途。</p></div></div>
+            <div class="geo-cinema-progress"><span id="geoCinemaProgress">01 / 12</span><div><i id="geoCinemaProgressFill"></i></div><span>历史节点</span></div>
+            <section class="geo-cinema-end" id="geoCinemaEnd" hidden>
+              <span>THE JOURNEY CONTINUES</span><h3>长征胜利 · 精神永续</h3><p>历史的征途已经写下，新的长征仍在继续。</p><button type="button" id="geoCinemaReplay">从第一章重新播放</button>
+            </section>
+          </main>
+          <footer class="geo-cinema-controls">
+            <button type="button" id="geoCinemaPrev">上一事件</button>
+            <button type="button" id="geoCinemaPlay">▶ 播放</button>
+            <button type="button" id="geoCinemaNext">下一事件</button>
+            <button type="button" id="geoCinemaFullscreen">切换全屏</button>
+          </footer>
+          <p class="geo-cinema-footnote">地图为历史地点与现代地名参考坐标的教学示意，不是精确历史行军轨迹。</p>
+        </div>
+      </div>
     <p class="geo-map-caution"><strong>地图口径：</strong>标记采用现代城市、县城或县域参考坐标，不能等同于1930年代的具体驻地或战斗发生点；虚线仅连接有史料记载的代表性节点，不代表实际道路、里程或完整行军轨迹。会宁与将台堡分别对应1936年10月9日、10月22日两次会师。</p>
     <div class="geo-map-sources"><a href="https://www.dswxyjy.org.cn/GB/427277/462086/" target="_blank" rel="noopener">中央党史和文献研究院：长征胜利90周年专题 ↗</a><a href="https://www.gsdfszw.org.cn/gssz/dyl/dsjjszs/201612/P020170214612325804475.pdf" target="_blank" rel="noopener">甘肃地方史志：红军长征甘肃路线图 ↗</a><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">坐标数据 © OpenStreetMap contributors · ODbL 1.0 ↗</a><a href="https://doi.org/10.1038/s41598-025-89565-1" target="_blank" rel="noopener">上游长江地理单元与河流水系研究 ↗</a></div>
   </section>
@@ -141,7 +166,7 @@
     <small>本网站为学生网页设计作品。历史叙述以页面列出的公开党史、军史和档案资料为依据；示意图不代表精确地理测绘。图片与档案使用须遵守原发布机构的版权和转载规定。</small>
     <span class="copyright">© 2026 DIGITAL LONG MARCH · STUDENT DESIGN PROJECT</span>
   </footer>
-  <script src="js/route-map.js?v=14.8"></script>
+  <script src="js/route-map.js?v=14.9"></script>
   <script src="js/pages.js"></script>
 </body>
 </html>
