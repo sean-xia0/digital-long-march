@@ -134,6 +134,29 @@
     };
     const setTilt=value=>{const angle=Math.max(0,Math.min(46,Number(value)||0));mapNode.style.setProperty("--map-tilt",angle+"deg");if(tiltInput)tiltInput.value=String(angle);if(tiltValue)tiltValue.textContent=angle+"°";};
     const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||105));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
+    const cameraReset=document.getElementById("geoCameraReset");
+    const setCameraFocus=id=>{
+      const place=places[id];if(!place)return;
+      const point=xy(place),width=mapNode.clientWidth,height=mapNode.clientHeight;
+      if(!width||!height)return;
+      const fit=Math.min(width/900,height/540),drawWidth=900*fit,drawHeight=540*fit;
+      const offsetX=(width-drawWidth)/2,offsetY=(height-drawHeight)/2;
+      const targetX=offsetX+point.x*fit,targetY=offsetY+point.y*fit;
+      const zoom=1.22;
+      setZoom(122);
+      mapNode.style.setProperty("--map-pan-x",(width/2-targetX*zoom)+"px");
+      mapNode.style.setProperty("--map-pan-y",(height/2-targetY*zoom)+"px");
+      mapNode.dataset.cameraFocus=id;
+      if(status)status.textContent="历史镜头已聚焦："+place.name+" · 自动运镜";
+    };
+    const resetCamera=()=>{
+      mapNode.style.setProperty("--map-pan-x","0px");
+      mapNode.style.setProperty("--map-pan-y","0px");
+      delete mapNode.dataset.cameraFocus;
+      setZoom(105);
+      if(status)status.textContent="镜头已归位 · 完整路线视图";
+    };
+    cameraReset?.addEventListener("click",resetCamera);
     if(tiltInput)tiltInput.addEventListener("input",()=>setTilt(tiltInput.value));
     if(zoomInput)zoomInput.addEventListener("input",()=>setZoom(zoomInput.value));
     zoomIn?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||105)+10));
@@ -145,7 +168,7 @@
     let motionOn=!prefersReduced;
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
-    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}mapNode.classList.remove("regions-muted");if(regionToggle){regionToggle.setAttribute("aria-pressed","true");regionToggle.textContent="地理分区：显示";}setMotion(!prefersReduced);});
+    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);resetCamera();mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}mapNode.classList.remove("regions-muted");if(regionToggle){regionToggle.setAttribute("aria-pressed","true");regionToggle.textContent="地理分区：显示";}setMotion(!prefersReduced);});
     let activeRouteKey="all";
     const distanceKm=(a,b)=>{
       const rad=value=>value*Math.PI/180;
@@ -229,6 +252,7 @@
       if(!eventData)return;
       currentTimelineIndex=safeIndex;
       if(immersiveOn)setImmersiveFocus(eventData.region);
+      setCameraFocus(eventData.place);
       const button=timelineList?.querySelector('[data-timeline-index="'+safeIndex+'"]');
       updateFallback(eventData.route);
       showPlace(eventData.place);
