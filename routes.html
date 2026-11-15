@@ -46,7 +46,7 @@
   <div class="section-topline reveal"><span class="eyebrow">ROUTE ATLAS / MULTIPLE COLUMNS</span><span class="section-number">路线 / 02</span></div>
   <div class="page-intro reveal"><p class="overline">不同出发地 · 不同历史轨迹</p><h2>四路红军，<br><em>在地理中交汇。</em></h2><p>地图采用现代地名参考坐标与本地地形艺术层，支持立体视角、山脉河流注记、动态路线和节点信息。所有底图元素本地绘制，断网仍可交互。</p></div>
   <section class="geo-atlas reveal" aria-labelledby="geoAtlasTitle">
-    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.4 · OFFLINE 2.5D + MAP LAYERS + ZOOM</span></div>
+    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V14.5 · GEOGRAPHIC REGIONS + ROUTE LINKAGE</span></div>
     <div class="geo-route-controls" role="group" aria-label="筛选地图路线">
       <button class="geo-route-btn active" data-geo-route="all" aria-pressed="true">全部路线</button>
       <button class="geo-route-btn" data-geo-route="central" aria-pressed="false">中央红军</button>
@@ -59,12 +59,12 @@
       <label class="geo-zoom-control" for="geoZoom"><span>地图缩放</span><strong id="geoZoomValue">105%</strong><input id="geoZoom" type="range" min="100" max="150" step="5" value="105" aria-label="调整地图缩放比例"></label>
       <button type="button" id="geoZoomOut" aria-label="缩小地图">− 缩小</button><button type="button" id="geoZoomIn" aria-label="放大地图">＋ 放大</button>
       <button type="button" id="geoTerrainToggle" aria-pressed="true">地形注记：显示</button>
-      <button type="button" id="geoRiverToggle" aria-pressed="true">河流图层：显示</button>
+      <button type="button" id="geoRiverToggle" aria-pressed="true">河流图层：显示</button><button type="button" id="geoRegionToggle" aria-pressed="true">地理分区：显示</button>
       <button type="button" id="geoMotionToggle" aria-pressed="true">动态路线：开启</button>
       <button type="button" id="geoViewReset">重置视角</button>
     </div>
     <div class="geo-map-legend" aria-label="地图图例">
-      <span><i class="legend-route"></i>部队路线</span><span><i class="legend-river"></i>主要河流（示意）</span><span><i class="legend-mountain"></i>山地地形（艺术表达）</span><span><i class="legend-node"></i>历史地点参考点</span>
+      <span><i class="legend-route"></i>部队路线</span><span><i class="legend-river"></i>主要河流（示意）</span><span><i class="legend-mountain"></i>山地地形（艺术表达）</span><span><i class="legend-node"></i>历史地点参考点</span><span><i class="legend-region"></i>地理分区示意</span>
     </div>
     <div class="geo-map-frame"><div id="longMarchMap" role="application" aria-label="中国工农红军长征代表性历史地点交互地图"><div class="geo-map-loading">正在绘制本地坐标示意图…</div></div></div>
     <div class="geo-map-meta"><span id="geoMapStatus" aria-live="polite">正在初始化离线地图</span><span>现代地名参考坐标：OpenStreetMap contributors · ODbL 1.0；地形阴影为艺术化示意，非 DEM 高程数据</span></div>
