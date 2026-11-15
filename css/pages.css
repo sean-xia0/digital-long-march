@@ -119,3 +119,20 @@
 .fallback-place:focus circle:first-child{stroke:#f0d49f;stroke-width:2}
 @media(max-width:760px){.geo-map-frame{margin:0 8px}#longMarchMap{height: min(68vh, 460px);min-height:340px}.geo-map-meta{overflow-wrap:anywhere}.geo-map-caution{font-size:11px;line-height:1.9}.geo-map-detail p,.geo-map-detail li{font-size:12px}.geo-map-sources a{font-size:11px;line-height:1.8}}
 @media(prefers-reduced-motion:reduce){.geo-atlas *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* V9 chronology controls */
+.geo-timeline{margin:22px 18px 28px;border:1px solid rgba(198,166,107,.2);background:rgba(27,24,24,.72)}
+.geo-timeline-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;padding:22px 24px 17px;border-bottom:1px solid rgba(198,166,107,.13)}
+.geo-timeline-head h4{font:500 21px var(--serif);color:#eee1d2;margin:8px 0}
+.geo-timeline-head p{font-size:10px;line-height:1.8;color:#a99d92;margin:0}
+.geo-timeline-count{font-size:8px;letter-spacing:1.5px;color:var(--page-gold);white-space:nowrap}
+.geo-timeline-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:16px}
+.geo-timeline-list button{display:grid;grid-template-columns:100px 1fr;gap:4px 12px;text-align:left;padding:12px 14px;border:1px solid rgba(198,166,107,.13);background:rgba(255,255,255,.018);color:#d8cbbb;cursor:pointer;min-width:0}
+.geo-timeline-list button:hover,.geo-timeline-list button.active{border-color:rgba(198,166,107,.68);background:rgba(198,166,107,.09)}
+.geo-timeline-list time{grid-row:span 2;color:var(--page-gold);font:500 12px var(--serif);align-self:center}
+.geo-timeline-list strong{font-size:10px;line-height:1.7;font-weight:500}
+.geo-timeline-list small{font-size:8px;color:#91857a}
+.geo-timeline-list button:focus-visible{outline:2px solid #e2c18a;outline-offset:3px}
+.geo-timeline-note{margin:0;padding:0 18px 17px;color:#9d9288;font-size:9px;line-height:1.9}
+.geo-map-detail li a{color:var(--page-gold);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){.geo-timeline{margin:18px 8px 22px}.geo-timeline-head{padding:18px 16px 14px}.geo-timeline-head h4{font-size:19px}.geo-timeline-list{grid-template-columns:1fr;padding:12px}.geo-timeline-list button{grid-template-columns:92px 1fr;padding:12px}.geo-timeline-list strong{font-size:11px}.geo-timeline-list time{font-size:12px}.geo-timeline-note{padding:0 14px 14px;font-size:10px}}
