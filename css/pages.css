@@ -210,3 +210,21 @@
 
 /* V13.3 expanded mobile map marker hit target */
 .geo-place-hit{fill:transparent;pointer-events:all;cursor:pointer}
+
+
+/* V14 historical route playback controls */
+.geo-playback{padding:16px 18px 14px;border-bottom:1px solid rgba(198,166,107,.13);background:linear-gradient(100deg,rgba(116,28,36,.13),rgba(255,255,255,.012))}
+.geo-playback-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.geo-playback-actions button,.geo-playback-actions select{min-height:38px;border:1px solid rgba(198,166,107,.3);background:rgba(255,255,255,.025);color:#d8c8b3;padding:8px 13px;font:500 10px var(--sans);cursor:pointer}
+.geo-playback-actions button:hover,.geo-playback-actions button[aria-pressed="true"]{border-color:#c6a66b;background:rgba(198,166,107,.14);color:#f0d8b0}
+.geo-playback-actions #geoPlaybackPlay{min-width:104px;border-color:rgba(198,166,107,.65);color:#f0d8b0}
+.geo-playback-actions label{margin-left:auto;color:#a99d92;font-size:10px}
+.geo-playback-actions select{min-width:112px}
+.geo-playback-progress{display:grid;grid-template-columns:auto minmax(80px,1fr) minmax(130px,auto);align-items:center;gap:12px;margin-top:14px;color:#b9a88f;font-size:10px}
+.geo-playback-progress input{width:100%;accent-color:#c6a66b;cursor:pointer}
+.geo-playback-progress output{color:#e2c18a;font-variant-numeric:tabular-nums;text-align:right}
+.geo-playback>p{margin:9px 0 0;color:#8f8378;font-size:9px;line-height:1.8}
+.fallback-place.event-current .geo-place-dot{fill:#f0bd70;stroke:#fff4df;stroke-width:3;r:11}
+.fallback-place.event-current text{fill:#fff0d5;font-weight:700}
+@media(max-width:760px){.geo-playback{padding:13px 12px}.geo-playback-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.geo-playback-actions button{padding:8px 5px;font-size:10px}.geo-playback-actions #geoPlaybackPlay{min-width:0}.geo-playback-actions label{grid-column:1 / 2;margin:0;align-self:center}.geo-playback-actions select{grid-column:2 / 4;width:100%}.geo-playback-progress{grid-template-columns:1fr auto;gap:8px}.geo-playback-progress span{grid-column:1 / -1}.geo-playback-progress output{font-size:9px}.geo-playback>p{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.fallback-place.event-current .geo-place-dot{r:9}}
