@@ -202,3 +202,8 @@
 /* V13.1 ensure decorative terrain layers never block interactive map markers */
 .geo-terrain-svg>rect,.geo-grid,.geo-contours,.geo-mountain-ridges,.geo-river,.geo-map-heading,.geo-map-foot,.geo-north-arrow,.geo-route-line{pointer-events:none}
 .geo-terrain-svg .fallback-place{pointer-events:auto}
+
+/* V13.2 larger map marker touch targets */
+.geo-place-hit{fill:transparent;pointer-events:all;cursor:pointer}
+.geo-place-dot{r:6.5}
+@media(max-width:760px){.geo-place-dot{r:8}}
