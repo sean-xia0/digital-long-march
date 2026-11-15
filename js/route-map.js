@@ -100,10 +100,10 @@
     const zoomIn=document.getElementById("geoZoomIn"),zoomOut=document.getElementById("geoZoomOut");
     const terrainToggle=document.getElementById("geoTerrainToggle"),riverToggle=document.getElementById("geoRiverToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
     const setTilt=value=>{const angle=Math.max(0,Math.min(46,Number(value)||0));mapNode.style.setProperty("--map-tilt",angle+"deg");if(tiltInput)tiltInput.value=String(angle);if(tiltValue)tiltValue.textContent=angle+"°";};
-    const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||104));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
+    const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||105));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
     if(tiltInput)tiltInput.addEventListener("input",()=>setTilt(tiltInput.value));
     if(zoomInput)zoomInput.addEventListener("input",()=>setZoom(zoomInput.value));
-    zoomIn?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||104)+10));
+    zoomIn?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||105)+10));
     zoomOut?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||104)-10));
     if(terrainToggle)terrainToggle.addEventListener("click",()=>{const on=terrainToggle.getAttribute("aria-pressed")!=="true";terrainToggle.setAttribute("aria-pressed",String(on));terrainToggle.textContent="地形注记："+(on?"显示":"隐藏");mapNode.classList.toggle("terrain-muted",!on);});
     if(riverToggle)riverToggle.addEventListener("click",()=>{const on=riverToggle.getAttribute("aria-pressed")!=="true";riverToggle.setAttribute("aria-pressed",String(on));riverToggle.textContent="河流图层："+(on?"显示":"隐藏");mapNode.classList.toggle("rivers-muted",!on);});
@@ -111,7 +111,7 @@
     let motionOn=!prefersReduced;
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
-    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(104);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}setMotion(!prefersReduced);});
+    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}setMotion(!prefersReduced);});
     let activeRouteKey="all";
     const updateFallback = key => {
       activeRouteKey=key;
