@@ -16,6 +16,7 @@
     xiaojin: {name:"小金（懋功）", province:"四川省阿坝州", lat:31.1674297, lon:102.5040173, type:"现代小金县参考点", note:"1935年6月红一、红四方面军在懋功地区会师。县域参考点不等同于具体会师地点。"},
     wuqi: {name:"吴起镇（今吴起县）", province:"陕西省延安市", lat:36.9825000, lon:108.1594440, type:"现代吴起县城参考点", note:"中央红军主力于1935年10月19日到达陕北吴起镇。当前标记采用现代吴起县城参考坐标。"},
     tongjiang: {name:"通江（川陕根据地区域）", province:"四川省巴中市", lat:32.1198034, lon:107.3721286, type:"现代通江县参考点", note:"红四方面军长征的重要出发区域之一。地图使用现代通江县参考坐标。"},
+    cangxi: {name:"苍溪红军渡纪念地", province:"四川省广元市苍溪县", lat:31.7283333, lon:105.9544444, type:"现代红军渡纪念地参考坐标", note:"1935年3月28日红四方面军强渡嘉陵江战役的主渡口位于苍溪塔子山湾一带。当前坐标参考现代红军渡纪念地，不是历史渡口遗址的精确测绘坐标。"},
     maoxian: {name:"茂县", province:"四川省阿坝州", lat:31.6835061, lon:103.8507078, type:"现代茂县参考点", note:"红四方面军长征过程中经过的川西地区之一。此处为现代县城参考点。"},
     ganzi: {name:"甘孜", province:"四川省甘孜州", lat:31.6273563, lon:99.9886967, type:"现代甘孜镇参考点", note:"1936年6月，红二、红六军团在甘孜地区与红四方面军会师。"},
     huining: {name:"会宁", province:"甘肃省白银市", lat:35.6894700, lon:105.0558676, type:"现代会师镇参考点", note:"1936年10月9日，红一、红四方面军在甘肃会宁会师。"},
@@ -30,7 +31,7 @@
 
   const routes = {
     central: {name:"中央红军（红一方面军）", period:"1934.10 — 1935.10", color:"#d7a66d", text:"从中央革命根据地出发，经历湘江战役、遵义会议、四渡赤水、巧渡金沙江、强渡大渡河等重要阶段，1935年10月到达陕北吴起镇。", ids:["ruijin","yudu","zunyi","xiaojin","wuqi"], stops:["瑞金 / 中央革命根据地区域","于都 / 1934年10月出发","遵义 / 1935年1月遵义会议","小金（懋功）/ 1935年6月会师","吴起镇 / 1935年10月到达"]},
-    fourth: {name:"红四方面军", period:"1935.03 — 1936.10", color:"#bd7566", text:"从川陕根据地区域出发，经过川西、懋功、甘孜等地，经历南下与北上等复杂历程，1936年10月9日在会宁与红一方面军会师。", ids:["tongjiang","maoxian","xiaojin","ganzi","huining"], stops:["通江 / 川陕根据地区域","茂县 / 川西行军区域","小金（懋功）/ 1935年6月会师","甘孜 / 1936年与红二、红六军团会合","会宁 / 1936年10月9日会师"]},
+    fourth: {name:"红四方面军", period:"1935.03 — 1936.10", color:"#bd7566", text:"从川陕根据地区域出发，经过川西、懋功、甘孜等地，经历南下与北上等复杂历程，1936年10月9日在会宁与红一方面军会师。", ids:["tongjiang","cangxi","maoxian","xiaojin","ganzi","huining"], stops:["通江 / 川陕根据地区域","苍溪红军渡 / 1935年3月28日强渡嘉陵江","茂县 / 川西行军区域","小金（懋功）/ 1935年6月会师","甘孜 / 1936年与红二、红六军团会合","会宁 / 1936年10月9日会师"]},
     second: {name:"红二、红六军团（后编为红二方面军）", period:"1935.11 — 1936.10", color:"#8da6a0", text:"从湖南桑植出发，转战贵州、云南，经石鼓等地渡过金沙江，1936年6月在甘孜与红四方面军会合，随后共同北上，于10月22日在将台堡会师。", ids:["sangzhi","bijie","lijiang","ganzi","xiji"], stops:["桑植 / 1935年11月出发","毕节 / 黔西、大定、毕节地区","丽江（石鼓地区）/ 渡金沙江区域","甘孜 / 1936年6月会合","将台堡所在县域 / 1936年10月22日会师"]},
     twentyfive: {name:"红二十五军", period:"1934.11 — 1935.09", color:"#c2a5c8", text:"1934年11月16日从河南罗山县何家冲出发，孤军北上，1935年9月在陕甘苏区永坪镇与红二十六、红二十七军会师，随后合编为红十五军团。", ids:["luoshan","luonan","yanchuan"], stops:["罗山（何家冲所在县域）/ 1934年11月16日出发","洛南 / 豫西、陕南转战区域","永坪镇所在县域（延川）/ 1935年9月会师"]}
   };
@@ -40,11 +41,11 @@
     {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
     {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
-    {date:"1935.03",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"tongjiang",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1935.03",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
     {date:"1935.06",title:"红一、红四方面军在懋功地区会师",route:"central",place:"xiaojin",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
-    {date:"1935.09（中旬）",title:"红二十五军抵达永坪镇并与陕北红军会师",route:"twentyfive",place:"yanchuan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
+    {date:"1935.09.15—16",title:"红二十五军抵达永坪镇并与陕北红军会师",route:"twentyfive",place:"yanchuan",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html"},
     {date:"1936.06.30",title:"红二、红六军团先后在甘孜地区会合",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1936.10.09 / 10.22",title:"红一、红四方面军在会宁会师；红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
