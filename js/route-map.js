@@ -2,6 +2,8 @@
   "use strict";
   const mapNode = document.getElementById("longMarchMap");
   if (!mapNode) return;
+  const originalMapParent=mapNode.parentElement;
+  const originalMapNext=mapNode.nextSibling;
   const status = document.getElementById("geoMapStatus");
   const detailTitle = document.getElementById("geoDetailTitle");
   const detailText = document.getElementById("geoDetailText");
@@ -257,6 +259,7 @@
     const captionText=document.getElementById("geoCaptionText");
     const cinemaOpen=document.getElementById("geoCinemaOpen");
     const cinemaOverlay=document.getElementById("geoCinemaOverlay");
+    const cinemaMapWrap=document.getElementById("geoCinemaMapWrap");
     const cinemaClose=document.getElementById("geoCinemaClose");
     const cinemaKicker=document.getElementById("geoCinemaKicker");
     const cinemaChapter=document.getElementById("geoCinemaChapter");
@@ -293,12 +296,16 @@
       if(currentTimelineIndex<0)selectTimeline(0);
       cinemaOverlay.hidden=false;
       cinemaOverlay.setAttribute("aria-hidden","false");
+      if(cinemaMapWrap){cinemaMapWrap.appendChild(mapNode);mapNode.style.height="clamp(230px, 39vh, 390px)";}
       document.body.classList.add("geo-cinema-active");
       cinemaClose?.focus();
       if(cinemaOverlay.requestFullscreen){const request=cinemaOverlay.requestFullscreen();if(request&&request.catch)request.catch(()=>{});}
     };
     const closeCinema=()=>{
       if(!cinemaOverlay)return;
+      stopPlayback();
+      if(originalMapParent)originalMapParent.insertBefore(mapNode,originalMapNext);
+      mapNode.style.height="";
       cinemaOverlay.hidden=true;
       cinemaOverlay.setAttribute("aria-hidden","true");
       document.body.classList.remove("geo-cinema-active");
