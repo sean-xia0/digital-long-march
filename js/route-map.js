@@ -255,6 +255,56 @@
     const captionDate=document.getElementById("geoCaptionDate");
     const captionTitle=document.getElementById("geoCaptionTitle");
     const captionText=document.getElementById("geoCaptionText");
+    const cinemaOpen=document.getElementById("geoCinemaOpen");
+    const cinemaOverlay=document.getElementById("geoCinemaOverlay");
+    const cinemaClose=document.getElementById("geoCinemaClose");
+    const cinemaKicker=document.getElementById("geoCinemaKicker");
+    const cinemaChapter=document.getElementById("geoCinemaChapter");
+    const cinemaTitle=document.getElementById("geoCinemaTitle");
+    const cinemaSummary=document.getElementById("geoCinemaSummary");
+    const cinemaDate=document.getElementById("geoCinemaDate");
+    const cinemaEvent=document.getElementById("geoCinemaEvent");
+    const cinemaText=document.getElementById("geoCinemaText");
+    const cinemaProgress=document.getElementById("geoCinemaProgress");
+    const cinemaProgressFill=document.getElementById("geoCinemaProgressFill");
+    const cinemaEnd=document.getElementById("geoCinemaEnd");
+    const cinemaPlay=document.getElementById("geoCinemaPlay");
+    const cinemaPrev=document.getElementById("geoCinemaPrev");
+    const cinemaNext=document.getElementById("geoCinemaNext");
+    const cinemaReplay=document.getElementById("geoCinemaReplay");
+    const cinemaFullscreen=document.getElementById("geoCinemaFullscreen");
+    const updateCinemaCard=(index,eventData)=>{
+      const chapterIndex=documentaryChapters.findIndex(chapter=>index>=chapter.start&&index<=chapter.end);
+      const chapter=documentaryChapters[chapterIndex];
+      if(!chapter)return;
+      if(cinemaKicker)cinemaKicker.textContent="DOCUMENTARY PRESENTATION · 1934—1936";
+      if(cinemaChapter)cinemaChapter.textContent="第"+(chapterIndex+1)+"章 · "+chapter.title.split("：")[0];
+      if(cinemaTitle)cinemaTitle.textContent=chapter.title.includes("：")?chapter.title.split("：").slice(1).join("："):chapter.title;
+      if(cinemaSummary)cinemaSummary.textContent=chapter.summary;
+      if(cinemaDate)cinemaDate.textContent=eventData.date;
+      if(cinemaEvent)cinemaEvent.textContent=eventData.title;
+      if(cinemaText)cinemaText.textContent=eventData.caption||eventData.title;
+      if(cinemaProgress)cinemaProgress.textContent=String(index+1).padStart(2,"0")+" / "+String(timelineEvents.length).padStart(2,"0");
+      if(cinemaProgressFill)cinemaProgressFill.style.width=((index+1)/timelineEvents.length*100)+"%";
+      if(cinemaEnd)cinemaEnd.hidden=index!==timelineEvents.length-1;
+    };
+    const openCinema=()=>{
+      if(!cinemaOverlay)return;
+      if(currentTimelineIndex<0)selectTimeline(0);
+      cinemaOverlay.hidden=false;
+      cinemaOverlay.setAttribute("aria-hidden","false");
+      document.body.classList.add("geo-cinema-active");
+      cinemaClose?.focus();
+      if(cinemaOverlay.requestFullscreen){const request=cinemaOverlay.requestFullscreen();if(request&&request.catch)request.catch(()=>{});}
+    };
+    const closeCinema=()=>{
+      if(!cinemaOverlay)return;
+      cinemaOverlay.hidden=true;
+      cinemaOverlay.setAttribute("aria-hidden","true");
+      document.body.classList.remove("geo-cinema-active");
+      if(document.fullscreenElement&&document.exitFullscreen){const request=document.exitFullscreen();if(request&&request.catch)request.catch(()=>{});}
+      cinemaOpen?.focus();
+    };
     let documentaryMode=false;
     let currentTimelineIndex=-1;
     let playbackTimer=null;
@@ -262,6 +312,7 @@
     const stopPlayback=()=>{
       if(playbackTimer!==null){window.clearInterval(playbackTimer);playbackTimer=null;}
       if(playbackPlay){playbackPlay.textContent="▶ 播放";}
+      if(cinemaPlay){cinemaPlay.textContent="▶ 播放";}
     };
     const updateDocumentaryCard=(index,eventData)=>{
       const chapterIndex=documentaryChapters.findIndex(chapter=>index>=chapter.start&&index<=chapter.end);
@@ -293,6 +344,7 @@
       timelineList?.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
       mapNode.querySelectorAll("[data-fallback-point]").forEach(item=>item.classList.toggle("event-current",item.dataset.fallbackPoint===eventData.place));
       updateDocumentaryCard(safeIndex,eventData);
+      updateCinemaCard(safeIndex,eventData);
       if(playbackRange)playbackRange.value=String(safeIndex);
       if(playbackOutput)playbackOutput.textContent=(safeIndex+1)+" / "+timelineEvents.length+" · "+eventData.date;
       if(playbackStatus)playbackStatus.textContent="正在查看第 "+(safeIndex+1)+" 个事件："+eventData.title;
@@ -316,6 +368,7 @@
         if(playbackTimer!==null){stopPlayback();if(playbackStatus)playbackStatus.textContent="播放已暂停";return;}
         if(currentTimelineIndex<0||currentTimelineIndex>=timelineEvents.length-1)selectTimeline(0);
         playbackPlay.textContent="Ⅱ 暂停";
+        if(cinemaPlay)cinemaPlay.textContent="Ⅱ 暂停";
         if(playbackStatus)playbackStatus.textContent="时间播放进行中";
         playbackTimer=window.setInterval(()=>{
           if(currentTimelineIndex>=timelineEvents.length-1){stopPlayback();if(playbackStatus)playbackStatus.textContent="演示完成";return;}
@@ -342,6 +395,24 @@
     playbackSpeed?.addEventListener("change",()=>{
       if(playbackTimer!==null){stopPlayback();playbackPlay?.click();}
     });
+    cinemaOpen?.addEventListener("click",openCinema);
+    cinemaClose?.addEventListener("click",closeCinema);
+    cinemaPrev?.addEventListener("click",()=>{stopPlayback();stepTimeline(-1);});
+    cinemaNext?.addEventListener("click",()=>{stopPlayback();stepTimeline(1);});
+    cinemaPlay?.addEventListener("click",()=>playbackPlay?.click());
+    cinemaReplay?.addEventListener("click",()=>{
+      stopPlayback();
+      selectTimeline(0);
+      playbackPlay?.click();
+    });
+    cinemaFullscreen?.addEventListener("click",()=>{
+      if(document.fullscreenElement&&document.exitFullscreen){const request=document.exitFullscreen();if(request&&request.catch)request.catch(()=>{});}
+      else if(cinemaOverlay?.requestFullscreen){const request=cinemaOverlay.requestFullscreen();if(request&&request.catch)request.catch(()=>{});}
+    });
+    cinemaOverlay?.addEventListener("keydown",event=>{
+      if(event.key==="Escape"&&!document.fullscreenElement){closeCinema();}
+    });
+
     updateFallback('all');
     return;
   }
