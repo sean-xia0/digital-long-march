@@ -53,3 +53,15 @@
 - `assets/meeting.svg`：胜利会师主题插画。
 
 页面明确标注“原创艺术示意”，不将其作为史实证据。SVG 文件由本项目制作，无外部图片依赖；后续若加入真实历史照片，仍须逐张核实来源、作者、授权和署名条件。
+
+
+## V12：获准转载的长征相关实物与旧址照片
+
+本版在史料档案页新增两张当代摄影照片。它们是长征相关文物展陈与历史旧址的实景照片，不是1930年代的现场历史照片。
+
+| 图片 | 摄影者 / 拍摄日期 | 来源 | 许可 | 使用方式 |
+|---|---|---|---|---|
+| 任弼时、周广才两条半截皮带（中国共产党历史展览馆展陈） | N509FZ / 2024-06-20 | https://commons.wikimedia.org/wiki/File:Uneaten_remainders_of_two_belts_during_Long_March_at_MCPC_(20240620094143).jpg | CC BY-SA 4.0 | 原图展示，署名摄影者并链接原始文件与许可 |
+| 哈达铺会议旧址：毛泽东、张闻天住室 | N509FZ / 2026-02-02 | https://commons.wikimedia.org/wiki/File:Former_residence_of_Mao_Zedong_and_Zhang_Wentian_at_Hadapu_(20260202170407).jpg | CC BY-SA 4.0 | 原图展示，署名摄影者并链接原始文件与许可 |
+
+许可文本：https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans 。两张照片未作裁剪或调色处理。图片说明明确区分“当代实物/旧址摄影”与“历史现场照片”，避免误导。页面直接通过 Wikimedia Commons 文件页加载原图缩放版本；若目标环境无法访问 Commons，图片可能无法显示，后续可在确认离线打包要求后再考虑合规本地化。
