@@ -259,8 +259,6 @@
     const captionText=document.getElementById("geoCaptionText");
     const documentaryImage=document.getElementById("geoDocumentaryImage");
     const documentaryImageCaption=document.getElementById("geoDocumentaryImageCaption");
-    const documentaryImage=document.getElementById("geoDocumentaryImage");
-    const documentaryImageCaption=document.getElementById("geoDocumentaryImageCaption");
     const cinemaOpen=document.getElementById("geoCinemaOpen");
     const cinemaOverlay=document.getElementById("geoCinemaOverlay");
     const cinemaMapWrap=document.getElementById("geoCinemaMapWrap");
@@ -272,7 +270,6 @@
     const cinemaDate=document.getElementById("geoCinemaDate");
     const cinemaEvent=document.getElementById("geoCinemaEvent");
     const cinemaText=document.getElementById("geoCinemaText");
-    const cinemaImage=document.getElementById("geoCinemaImage");
     const cinemaImage=document.getElementById("geoCinemaImage");
     const cinemaProgress=document.getElementById("geoCinemaProgress");
     const cinemaProgressFill=document.getElementById("geoCinemaProgressFill");
@@ -293,7 +290,6 @@
       if(cinemaDate)cinemaDate.textContent=eventData.date;
       if(cinemaEvent)cinemaEvent.textContent=eventData.title;
       if(cinemaText)cinemaText.textContent=eventData.caption||eventData.title;
-      if(cinemaImage&&eventData.image){cinemaImage.src=eventData.image;cinemaImage.alt=eventData.title+" · 原创历史场景艺术复原";}
       if(cinemaImage&&eventData.image){cinemaImage.src=eventData.image;cinemaImage.alt=eventData.title+" · 原创历史场景艺术复原";}
       if(cinemaProgress)cinemaProgress.textContent=String(index+1).padStart(2,"0")+" / "+String(timelineEvents.length).padStart(2,"0");
       if(cinemaProgressFill)cinemaProgressFill.style.width=((index+1)/timelineEvents.length*100)+"%";
@@ -340,8 +336,6 @@
       if(captionDate)captionDate.textContent=eventData.date;
       if(captionTitle)captionTitle.textContent=eventData.title;
       if(captionText)captionText.textContent=eventData.caption||eventData.title;
-      if(documentaryImage&&eventData.image){documentaryImage.src=eventData.image;documentaryImage.alt=eventData.title+" · 原创历史场景艺术复原";}
-      if(documentaryImageCaption)documentaryImageCaption.textContent=eventData.title+" · 原创历史场景艺术复原（非历史照片）";
       if(documentaryImage&&eventData.image){documentaryImage.src=eventData.image;documentaryImage.alt=eventData.title+" · 原创历史场景艺术复原";}
       if(documentaryImageCaption)documentaryImageCaption.textContent=eventData.title+" · 原创历史场景艺术复原（非历史照片）";
       if(chapterSelect)chapterSelect.value=String(chapterIndex);
