@@ -365,3 +365,7 @@ body.geo-cinema-active{overflow:hidden}
  .geo-cinema-progress span:last-child{display:none}
 }
 @media(prefers-reduced-motion:reduce){.geo-cinema-progress i{transition:none}.geo-cinema-end{animation:none}}
+
+.geo-cinema-map-wrap{width:100%;margin:26px 0 0;border:1px solid rgba(198,166,107,.28);background:#20282a;overflow:hidden;box-shadow:0 12px 34px rgba(0,0,0,.3)}
+.geo-cinema-map-wrap #longMarchMap{height:clamp(230px,39vh,390px);width:100%}
+@media(max-width:640px){.geo-cinema-map-wrap{margin:20px 0 0}.geo-cinema-map-wrap #longMarchMap{height:34vh;min-height:220px}}
