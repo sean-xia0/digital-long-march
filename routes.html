@@ -17,7 +17,7 @@
   <meta name="twitter:title" content="长征路线探索｜数字长征">
   <meta name="twitter:description" content="探索中央红军、红四方面军、红二方面军与红二十五军的代表性路线和地理节点。">
   <link rel="stylesheet" href="css/style.css?v=11">
-  <link rel="stylesheet" href="css/pages.css?v=13.3">
+  <link rel="stylesheet" href="css/pages.css?v=14.1">
 </head>
 <body class="subpage">
   <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -67,7 +67,22 @@
     <div class="geo-map-meta"><span id="geoMapStatus" aria-live="polite">正在初始化离线地图</span><span>现代地名参考坐标：OpenStreetMap contributors · ODbL 1.0；地形阴影为艺术化示意，非 DEM 高程数据</span></div>
     <div class="geo-map-detail" aria-live="polite"><div><span class="geo-detail-kicker" id="geoDetailKicker">ROUTE OVERVIEW</span><h4 id="geoDetailTitle">四路红军的历史坐标</h4><p id="geoDetailText">选择上方路线，查看代表性节点。地图连线用于表达节点之间的地理关系，不是历史行军轨迹复原。</p></div><ol id="geoDetailStops"><li>点击地图标记查看地点说明</li><li>切换路线查看不同部队的行程</li></ol></div>
     <section class="geo-timeline" aria-labelledby="geoTimelineTitle">
-      <div class="geo-timeline-head"><div><span class="eyebrow">CHRONOLOGY / 1934—1936</span><h4 id="geoTimelineTitle">沿着时间，读懂四路征程</h4><p>选择一个历史节点，地图将切换到对应部队并定位相关地点。</p></div><span class="geo-timeline-count">史料节点 · 12</span></div>
+      <div class="geo-timeline-head"><div><span class="eyebrow">CHRONOLOGY / 1934—1936</span><h4 id="geoTimelineTitle">沿着时间，读懂四路征程</h4><p>点击播放按时间顺序演示，或手动选择历史节点；地图将同步切换部队、地点和史料。</p></div><span class="geo-timeline-count">史料节点 · 12</span></div>
+      <div class="geo-playback" aria-label="长征路线时间播放控制">
+        <div class="geo-playback-actions">
+          <button type="button" id="geoPlaybackPrev" aria-label="上一个历史事件">上一事件</button>
+          <button type="button" id="geoPlaybackPlay" aria-pressed="false">▶ 播放</button>
+          <button type="button" id="geoPlaybackNext" aria-label="下一个历史事件">下一事件</button>
+          <label for="geoPlaybackSpeed">播放速度</label>
+          <select id="geoPlaybackSpeed" aria-label="选择每个事件的播放时长">
+            <option value="4000">慢速 · 4秒</option>
+            <option value="2800" selected>标准 · 2.8秒</option>
+            <option value="1800">快速 · 1.8秒</option>
+          </select>
+        </div>
+        <label class="geo-playback-progress" for="geoPlaybackRange"><span>时间进度</span><input id="geoPlaybackRange" type="range" min="0" max="11" step="1" value="0" aria-label="拖动定位历史事件"><output id="geoPlaybackOutput" for="geoPlaybackRange">选择事件 · 共12个</output></label>
+        <p id="geoPlaybackStatus" aria-live="polite">点击播放，按历史顺序浏览12个关键事件；也可拖动进度条或手动选择事件。</p>
+      </div>
       <div class="geo-timeline-list" id="geoTimelineList" aria-label="长征关键历史节点">
         <button type="button" data-timeline-index="0" aria-pressed="false"><time>1934.10</time><strong>中央红军从于都等地出发</strong><small>中央红军</small></button>
         <button type="button" data-timeline-index="1" aria-pressed="false"><time>1934.11.16</time><strong>红二十五军从何家冲出发</strong><small>红二十五军</small></button>
@@ -103,7 +118,7 @@
     <small>本网站为学生网页设计作品。历史叙述以页面列出的公开党史、军史和档案资料为依据；示意图不代表精确地理测绘。图片与档案使用须遵守原发布机构的版权和转载规定。</small>
     <span class="copyright">© 2026 DIGITAL LONG MARCH · STUDENT DESIGN PROJECT</span>
   </footer>
-  <script src="js/route-map.js?v=13.3"></script>
+  <script src="js/route-map.js?v=14.1"></script>
   <script src="js/pages.js"></script>
 </body>
 </html>
