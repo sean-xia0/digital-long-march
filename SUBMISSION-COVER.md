@@ -5,7 +5,7 @@
 - 作品名称：《数字长征：永不熄灭的征途》
 - 在线作品：https://sean-xia0.github.io/digital-long-march/
 - 源代码仓库：https://github.com/sean-xia0/digital-long-march
-- 版本：V10.2.1
+- 版本：V14.2
 - 作者姓名：________________
 - 学校：________________
 - 学院 / 系：________________
