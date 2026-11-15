@@ -91,6 +91,20 @@
       {name:"武陵山区",lon:109.4,lat:28.8}
     ];
     const terrainLabels = terrainNames.map(t=>{const p=project(t.lon,t.lat);return '<text class="geo-terrain-label" data-terrain-layer x="'+p.x+'" y="'+p.y+'">'+t.name+'</text>';}).join("");
+    // Schematic learning regions only; not administrative borders or historical control boundaries.
+    const geographicRegions = [
+      {name:"中央苏区（赣南闽西）",color:"#d7a66d",points:[[113.9,24.9],[116.2,25.0],[116.0,27.2],[114.2,27.5],[113.4,26.1]]},
+      {name:"川陕根据地区域",color:"#bd7566",points:[[105.8,30.8],[108.2,31.0],[108.7,33.1],[106.8,33.8],[105.2,32.4]]},
+      {name:"川西高原",color:"#8da6a0",points:[[98.9,29.8],[101.8,29.6],[104.2,31.2],[103.6,34.0],[100.5,34.3],[99.0,32.5]]},
+      {name:"黔滇转战区域",color:"#c2a5c8",points:[[99.4,25.4],[103.7,24.7],[106.4,26.8],[105.4,29.1],[101.8,29.6],[99.6,28.2]]},
+      {name:"陕甘苏区",color:"#d2bd88",points:[[105.0,34.1],[109.2,33.8],[111.6,36.0],[109.5,38.0],[105.7,37.5],[104.8,35.7]]}
+    ];
+    const regionMarkup = '<g class="geo-region-layer" data-region-layer>'+geographicRegions.map(region=>{
+      const pts=region.points.map(([lon,lat])=>{const p=project(lon,lat);return p.x.toFixed(1)+','+p.y.toFixed(1);}).join(' ');
+      const center=region.points.reduce((a,p)=>[a[0]+p[0]/region.points.length,a[1]+p[1]/region.points.length],[0,0]);
+      const label=project(center[0],center[1]);
+      return '<g class="geo-region" data-region-name="'+region.name+'"><polygon class="geo-region-shape" points="'+pts+'" fill="'+region.color+'"/><text class="geo-region-label" x="'+label.x.toFixed(1)+'" y="'+label.y.toFixed(1)+'">'+region.name+'</text></g>';
+    }).join('')+'</g>';
     const routeMarkup = routeKeys.map(key=>{
       const route=routes[key],pts=route.ids.map(id=>xy(places[id]));
       const d=pts.map((p,i)=>(i?"L":"M")+p.x.toFixed(1)+","+p.y.toFixed(1)).join(" ");
@@ -100,11 +114,11 @@
     }).join("");
     const labels = allIds.map(id=>{const pt=xy(places[id]);return '<g class="fallback-place" data-fallback-point="'+id+'" tabindex="0" role="button" aria-label="查看'+places[id].name+'"><circle class="geo-place-hit" cx="'+pt.x+'" cy="'+pt.y+'" r="32"/><circle class="geo-place-dot" cx="'+pt.x+'" cy="'+pt.y+'" r="6.5"/><text x="'+(pt.x+12)+'" y="'+(pt.y-10)+'">'+places[id].name+'</text></g>';}).join("");
     const mountains = '<g class="geo-mountain-ridges" data-terrain-layer><path d="M90 315 L130 255 L153 281 L185 205 L213 250 L245 180 L276 236 L310 190 L340 255 L370 220 L405 290"/><path d="M235 455 L275 385 L302 412 L342 335 L371 380 L408 315 L443 375 L475 345 L510 410"/><path d="M445 205 L480 145 L506 170 L540 108 L570 154 L606 94 L640 150 L672 118 L710 188"/><path d="M640 430 L678 365 L704 392 L740 320 L772 365 L806 310 L842 365"/></g>';
-    mapNode.innerHTML = '<svg id="routeTerrainSvg" class="geo-fallback-map geo-terrain-svg" viewBox="0 0 900 540" role="img" aria-label="长征路线立体地形示意图，包含四路代表性路线、河流、山地、地理网格和历史地点参考坐标"><defs><linearGradient id="terrainBase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46524b"/><stop offset=".48" stop-color="#293b39"/><stop offset="1" stop-color="#1d292b"/></linearGradient><linearGradient id="mountainFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b7a17b" stop-opacity=".72"/><stop offset="1" stop-color="#53615a" stop-opacity=".06"/></linearGradient><pattern id="terrainGrid" width="45" height="45" patternUnits="userSpaceOnUse"><path d="M45 0H0V45" fill="none" stroke="#d1b98e" stroke-opacity=".08"/></pattern><filter id="terrainGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="900" height="540" fill="url(#terrainBase)"/><rect width="900" height="540" fill="url(#terrainGrid)"/><g class="geo-contours" data-terrain-layer>'+terrainContours.map(d=>'<path d="'+d+'"/>').join("")+'</g>'+mountains+'<g class="geo-grid">'+gridLines+'</g>'+riverMarkup+terrainLabels+'<g class="geo-map-heading"><text x="48" y="27">LONG MARCH · TERRAIN ATLAS</text><text x="850" y="27" text-anchor="end">99°E—116.5°E / 24.5°N—38°N</text></g><g class="geo-north-arrow"><path d="M835 75V116 M835 75L824 94 M835 75L846 94"/><text x="835" y="66" text-anchor="middle">N</text></g>'+routeMarkup+labels+'<g class="geo-map-foot"><text x="48" y="520">现代地名参考坐标 · 河流/山脉为地理示意 · 非精确历史轨迹</text><text x="850" y="520" text-anchor="end">© OpenStreetMap contributors</text></g></svg>';
+    mapNode.innerHTML = '<svg id="routeTerrainSvg" class="geo-fallback-map geo-terrain-svg" viewBox="0 0 900 540" role="img" aria-label="长征路线立体地形示意图，包含四路代表性路线、地理分区、河流、山地、地理网格和历史地点参考坐标"><defs><linearGradient id="terrainBase" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#46524b"/><stop offset=".48" stop-color="#293b39"/><stop offset="1" stop-color="#1d292b"/></linearGradient><linearGradient id="mountainFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b7a17b" stop-opacity=".72"/><stop offset="1" stop-color="#53615a" stop-opacity=".06"/></linearGradient><pattern id="terrainGrid" width="45" height="45" patternUnits="userSpaceOnUse"><path d="M45 0H0V45" fill="none" stroke="#d1b98e" stroke-opacity=".08"/></pattern><filter id="terrainGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><rect width="900" height="540" fill="url(#terrainBase)"/><rect width="900" height="540" fill="url(#terrainGrid)"/><g class="geo-contours" data-terrain-layer>'+terrainContours.map(d=>'<path d="'+d+'"/>').join("")+'</g>'+regionMarkup+mountains+'<g class="geo-grid">'+gridLines+'</g>'+riverMarkup+terrainLabels+'<g class="geo-map-heading"><text x="48" y="27">LONG MARCH · TERRAIN ATLAS</text><text x="850" y="27" text-anchor="end">99°E—116.5°E / 24.5°N—38°N</text></g><g class="geo-north-arrow"><path d="M835 75V116 M835 75L824 94 M835 75L846 94"/><text x="835" y="66" text-anchor="middle">N</text></g>'+routeMarkup+labels+'<g class="geo-map-foot"><text x="48" y="520">现代地名参考坐标 · 河流/山脉为地理示意 · 非精确历史轨迹</text><text x="850" y="520" text-anchor="end">© OpenStreetMap contributors</text></g></svg>';
     const tiltInput=document.getElementById("geoTilt"),tiltValue=document.getElementById("geoTiltValue");
     const zoomInput=document.getElementById("geoZoom"),zoomValue=document.getElementById("geoZoomValue");
     const zoomIn=document.getElementById("geoZoomIn"),zoomOut=document.getElementById("geoZoomOut");
-    const terrainToggle=document.getElementById("geoTerrainToggle"),riverToggle=document.getElementById("geoRiverToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
+    const terrainToggle=document.getElementById("geoTerrainToggle"),riverToggle=document.getElementById("geoRiverToggle"),regionToggle=document.getElementById("geoRegionToggle"),motionToggle=document.getElementById("geoMotionToggle"),resetView=document.getElementById("geoViewReset");
     const setTilt=value=>{const angle=Math.max(0,Math.min(46,Number(value)||0));mapNode.style.setProperty("--map-tilt",angle+"deg");if(tiltInput)tiltInput.value=String(angle);if(tiltValue)tiltValue.textContent=angle+"°";};
     const setZoom=value=>{const zoom=Math.max(100,Math.min(150,Number(value)||105));mapNode.style.setProperty("--map-scale",(zoom/100).toFixed(2));if(zoomInput)zoomInput.value=String(zoom);if(zoomValue)zoomValue.textContent=zoom+"%";};
     if(tiltInput)tiltInput.addEventListener("input",()=>setTilt(tiltInput.value));
@@ -113,11 +127,12 @@
     zoomOut?.addEventListener("click",()=>setZoom(Number(zoomInput?.value||104)-10));
     if(terrainToggle)terrainToggle.addEventListener("click",()=>{const on=terrainToggle.getAttribute("aria-pressed")!=="true";terrainToggle.setAttribute("aria-pressed",String(on));terrainToggle.textContent="地形注记："+(on?"显示":"隐藏");mapNode.classList.toggle("terrain-muted",!on);});
     if(riverToggle)riverToggle.addEventListener("click",()=>{const on=riverToggle.getAttribute("aria-pressed")!=="true";riverToggle.setAttribute("aria-pressed",String(on));riverToggle.textContent="河流图层："+(on?"显示":"隐藏");mapNode.classList.toggle("rivers-muted",!on);});
+    if(regionToggle)regionToggle.addEventListener("click",()=>{const on=regionToggle.getAttribute("aria-pressed")!=="true";regionToggle.setAttribute("aria-pressed",String(on));regionToggle.textContent="地理分区："+(on?"显示":"隐藏");mapNode.classList.toggle("regions-muted",!on);});
     const prefersReduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let motionOn=!prefersReduced;
     const setMotion=on=>{motionOn=on;mapNode.classList.toggle("motion-paused",!on);if(motionToggle){motionToggle.setAttribute("aria-pressed",String(on));motionToggle.textContent="动态路线："+(on?"开启":"暂停");}};
     if(motionToggle){setMotion(motionOn);motionToggle.addEventListener("click",()=>setMotion(!motionOn));}
-    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}setMotion(!prefersReduced);});
+    if(resetView)resetView.addEventListener("click",()=>{setTilt(28);setZoom(105);mapNode.classList.remove("terrain-muted","rivers-muted");if(terrainToggle){terrainToggle.setAttribute("aria-pressed","true");terrainToggle.textContent="地形注记：显示";}if(riverToggle){riverToggle.setAttribute("aria-pressed","true");riverToggle.textContent="河流图层：显示";}mapNode.classList.remove("regions-muted");if(regionToggle){regionToggle.setAttribute("aria-pressed","true");regionToggle.textContent="地理分区：显示";}setMotion(!prefersReduced);});
     const distanceKm=(a,b)=>{
       const rad=value=>value*Math.PI/180;
       const dLat=rad(b.lat-a.lat),dLon=rad(b.lon-a.lon);
@@ -142,6 +157,7 @@
       if(!route||!Number.isInteger(index)||index<0||index>=route.ids.length-1)return;
       const from=places[route.ids[index]],to=places[route.ids[index+1]];
       const km=distanceKm(from,to);
+      mapNode.querySelectorAll("[data-fallback-point]").forEach(item=>item.classList.toggle("segment-current",item.dataset.fallbackPoint===route.ids[index]||item.dataset.fallbackPoint===route.ids[index+1]));
       if(segmentName)segmentName.textContent=route.name+" · 第 "+(index+1)+" 段";
       if(segmentDescription)segmentDescription.textContent=route.period+"。该分段用于阅读相邻代表性地点的地理关系，不表示连续、完整或精确的历史行军轨迹。";
       if(segmentStart)segmentStart.textContent="起点："+from.name+"（"+from.province+"）";
