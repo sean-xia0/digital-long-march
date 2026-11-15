@@ -157,7 +157,7 @@
       detailKicker.textContent="HISTORICAL EVENT / "+eventData.date;
       detailTitle.textContent=eventData.title;
       detailText.textContent=places[eventData.place].province+" · "+places[eventData.place].type+"。地图节点为现代地名参考坐标，不代表历史事件现场精确位置。";
-      detailStops.innerHTML="<li>所属路线："+routes[eventData.route].name+"</li><li><a href=\\""+eventData.source+"\\" target=\\"_blank\\" rel=\\"noopener\\">查看对应史料来源 ↗</a></li>";
+      detailStops.innerHTML='<li>所属路线：'+routes[eventData.route].name+'</li><li><a href="'+eventData.source+'" target="_blank" rel="noopener">查看对应史料来源 ↗</a></li>';
       timelineList?.querySelectorAll("button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});
       mapNode.querySelectorAll("[data-fallback-point]").forEach(item=>item.classList.toggle("event-current",item.dataset.fallbackPoint===eventData.place));
       if(playbackRange)playbackRange.value=String(safeIndex);
