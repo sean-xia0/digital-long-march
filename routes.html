@@ -44,9 +44,9 @@
 
 <section class="page-section section-shell"><div class="route-art-strip reveal"><figure><img src="assets/river-crossing.svg" alt="强渡江河主题原创艺术示意插画" loading="lazy"><figcaption>强渡江河 · 艺术示意</figcaption></figure><figure><img src="assets/snow-mountain.svg" alt="翻越雪山主题原创艺术示意插画" loading="lazy"><figcaption>翻越雪山 · 艺术示意</figcaption></figure><figure><img src="assets/meeting.svg" alt="胜利会师主题原创艺术示意插画" loading="lazy"><figcaption>胜利会师 · 艺术示意</figcaption></figure></div>
   <div class="section-topline reveal"><span class="eyebrow">ROUTE ATLAS / MULTIPLE COLUMNS</span><span class="section-number">路线 / 02</span></div>
-  <div class="page-intro reveal"><p class="overline">不同出发地 · 不同历史轨迹</p><h2>四路红军，<br><em>在地理中交汇。</em></h2><p>地图使用本地 SVG 按现代地名参考经纬度绘制，不加载在线底图。点击路线或节点，可查看历史说明；断网时交互仍可使用。</p></div>
+  <div class="page-intro reveal"><p class="overline">不同出发地 · 不同历史轨迹</p><h2>四路红军，<br><em>在地理中交汇。</em></h2><p>地图采用现代地名参考坐标与本地地形艺术层，支持立体视角、山脉河流注记、动态路线和节点信息。所有底图元素本地绘制，断网仍可交互。</p></div>
   <section class="geo-atlas reveal" aria-labelledby="geoAtlasTitle">
-    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V10.2 · OFFLINE HISTORICAL ATLAS</span></div>
+    <div class="geo-atlas-head"><div><span class="eyebrow">GEOGRAPHIC ROUTE ATLAS / 1934—1936</span><h3 id="geoAtlasTitle">长征地理坐标示意图</h3><p>本地绘制 · 四路筛选 · 节点可交互 · 无需网络</p></div><span class="geo-atlas-index">V13 · OFFLINE 2.5D TERRAIN ATLAS</span></div>
     <div class="geo-route-controls" role="group" aria-label="筛选地图路线">
       <button class="geo-route-btn active" data-geo-route="all" aria-pressed="true">全部路线</button>
       <button class="geo-route-btn" data-geo-route="central" aria-pressed="false">中央红军</button>
@@ -54,8 +54,17 @@
       <button class="geo-route-btn" data-geo-route="second" aria-pressed="false">红二方面军</button>
       <button class="geo-route-btn" data-geo-route="twentyfive" aria-pressed="false">红二十五军</button>
     </div>
+    <div class="geo-map-tools" aria-label="地图显示控制">
+      <label class="geo-tilt-control" for="geoTilt"><span>立体视角</span><strong id="geoTiltValue">28°</strong><input id="geoTilt" type="range" min="0" max="46" step="2" value="28" aria-label="调整地图立体倾斜角度"></label>
+      <button type="button" id="geoTerrainToggle" aria-pressed="true">地形注记：显示</button>
+      <button type="button" id="geoMotionToggle" aria-pressed="true">动态路线：开启</button>
+      <button type="button" id="geoViewReset">重置视角</button>
+    </div>
+    <div class="geo-map-legend" aria-label="地图图例">
+      <span><i class="legend-route"></i>部队路线</span><span><i class="legend-river"></i>主要河流（示意）</span><span><i class="legend-mountain"></i>山地地形（艺术表达）</span><span><i class="legend-node"></i>历史地点参考点</span>
+    </div>
     <div class="geo-map-frame"><div id="longMarchMap" role="application" aria-label="中国工农红军长征代表性历史地点交互地图"><div class="geo-map-loading">正在绘制本地坐标示意图…</div></div></div>
-    <div class="geo-map-meta"><span id="geoMapStatus" aria-live="polite">正在初始化离线地图</span><span>现代地名参考坐标来源：OpenStreetMap contributors；本图不加载在线底图</span></div>
+    <div class="geo-map-meta"><span id="geoMapStatus" aria-live="polite">正在初始化离线地图</span><span>现代地名参考坐标：OpenStreetMap contributors · ODbL 1.0；地形阴影为艺术化示意，非 DEM 高程数据</span></div>
     <div class="geo-map-detail" aria-live="polite"><div><span class="geo-detail-kicker" id="geoDetailKicker">ROUTE OVERVIEW</span><h4 id="geoDetailTitle">四路红军的历史坐标</h4><p id="geoDetailText">选择上方路线，查看代表性节点。地图连线用于表达节点之间的地理关系，不是历史行军轨迹复原。</p></div><ol id="geoDetailStops"><li>点击地图标记查看地点说明</li><li>切换路线查看不同部队的行程</li></ol></div>
     <section class="geo-timeline" aria-labelledby="geoTimelineTitle">
       <div class="geo-timeline-head"><div><span class="eyebrow">CHRONOLOGY / 1934—1936</span><h4 id="geoTimelineTitle">沿着时间，读懂四路征程</h4><p>选择一个历史节点，地图将切换到对应部队并定位相关地点。</p></div><span class="geo-timeline-count">史料节点 · 12</span></div>
@@ -94,7 +103,7 @@
     <small>本网站为学生网页设计作品。历史叙述以页面列出的公开党史、军史和档案资料为依据；示意图不代表精确地理测绘。图片与档案使用须遵守原发布机构的版权和转载规定。</small>
     <span class="copyright">© 2026 DIGITAL LONG MARCH · STUDENT DESIGN PROJECT</span>
   </footer>
-  <script src="js/route-map.js?v=10.2"></script>
+  <script src="js/route-map.js?v=13.0"></script>
   <script src="js/pages.js"></script>
 </body>
 </html>
