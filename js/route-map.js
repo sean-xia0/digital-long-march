@@ -41,14 +41,15 @@
     {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html"},
     {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html"},
-    {date:"1935.03",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
-    {date:"1935.06",title:"红一、红四方面军在懋功地区会师",route:"central",place:"xiaojin",source:"https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html"},
+    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html"},
+    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1935.09.15—16",title:"红二十五军抵达永坪镇并与陕北红军会师",route:"twentyfive",place:"yanchuan",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html"},
-    {date:"1936.06.30",title:"红二、红六军团先后在甘孜地区会合",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.06.03—07.02",title:"红二、红六军团先后与红四方面军部队会合，集结甘孜",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
     {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
-    {date:"1936.10.09 / 10.22",title:"红一、红四方面军在会宁会师；红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
+    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"},
+    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html"}
   ];
   const timelineList = document.getElementById("geoTimelineList");
 
