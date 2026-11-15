@@ -144,7 +144,7 @@
     const playbackDelay=()=>Number(playbackSpeed?.value||2800);
     const stopPlayback=()=>{
       if(playbackTimer!==null){window.clearInterval(playbackTimer);playbackTimer=null;}
-      if(playbackPlay){playbackPlay.textContent="▶ 播放";playbackPlay.setAttribute("aria-pressed","false");}
+      if(playbackPlay){playbackPlay.textContent="▶ 播放";}
     };
     const selectTimeline=index=>{
       const safeIndex=Math.max(0,Math.min(timelineEvents.length-1,Number(index)));
@@ -183,7 +183,6 @@
         if(playbackTimer!==null){stopPlayback();if(playbackStatus)playbackStatus.textContent="播放已暂停";return;}
         if(currentTimelineIndex<0||currentTimelineIndex>=timelineEvents.length-1)selectTimeline(0);
         playbackPlay.textContent="Ⅱ 暂停";
-        playbackPlay.setAttribute("aria-pressed","true");
         if(playbackStatus)playbackStatus.textContent="时间播放进行中";
         playbackTimer=window.setInterval(()=>{
           if(currentTimelineIndex>=timelineEvents.length-1){stopPlayback();if(playbackStatus)playbackStatus.textContent="演示完成";return;}
