@@ -40,18 +40,18 @@
   const routeKeys = Object.keys(routes);
   const allIds = [...new Set(Object.values(routes).flatMap(r => r.ids))];
   const timelineEvents = [
-    {date:"1934.10",title:"中央红军从于都等地出发",route:"central",place:"yudu",region:"central",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1934年10月，中央红军主力从于都等地出发，踏上长征征途。地图标记为现代于都县参考坐标。"},
-    {date:"1934.11.16",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",region:"eyuwan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html",caption:"1934年11月16日，红二十五军从河南罗山县何家冲出发，开始独立转移。"},
-    {date:"1935.01",title:"遵义会议召开",route:"central",place:"zunyi",region:"southwest",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html",caption:"遵义会议在长征途中召开，成为中国共产党和红军历史上的重要转折节点。"},
-    {date:"1935.03.28",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",region:"sichuan",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html",caption:"1935年3月28日，红四方面军强渡嘉陵江，开始战略转移。此处定位现代红军渡纪念地参考坐标。"},
-    {date:"1935.06.12—18",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年6月12日，先头部队在达维会师；6月18日，中央红军主力抵达懋功。两个日期对应不同阶段。"},
-    {date:"1935.09.15—16",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"红二十五军于9月15日抵达永坪镇，9月16日与红二十六、红二十七军正式会师。"},
-    {date:"1935.10.19",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年10月19日，中央红军主力到达陕北吴起镇，中央红军长征的重要阶段由此告一段落。"},
-    {date:"1935.11.19",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",region:"southwest",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html",caption:"1935年11月19日，红二、红六军团从湖南桑植刘家坪等地出发，开始新的战略转移。"},
-    {date:"1936.06下旬—07.02",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html",caption:"1936年6月下旬至7月2日，红二、红六军团在甘孜地区与红四方面军会合。"},
-    {date:"1936.07.05",title:"红二方面军正式组成",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年7月5日，红二方面军正式组成，部队编制进入新的阶段。"},
-    {date:"1936.10.09",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月9日，红一、红四方面军在甘肃会宁会师。"},
-    {date:"1936.10.22",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月22日，红一、红二方面军在宁夏将台堡会师。会宁与将台堡是两次不同的会师事件。"}
+    {date:"1934.10",image:"assets/milestone-01-yudu.svg",title:"中央红军从于都等地出发",route:"central",place:"yudu",region:"central",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1934年10月，中央红军主力从于都等地出发，踏上长征征途。地图标记为现代于都县参考坐标。"},
+    {date:"1934.11.16",image:"assets/milestone-02-hejiachong.svg",title:"红二十五军从河南罗山何家冲出发",route:"twentyfive",place:"luoshan",region:"eyuwan",source:"https://www.dswxyjy.org.cn/n1/2026/0903/c244516-40791810.html",caption:"1934年11月16日，红二十五军从河南罗山县何家冲出发，开始独立转移。"},
+    {date:"1935.01",image:"assets/milestone-03-zunyi.svg",title:"遵义会议召开",route:"central",place:"zunyi",region:"southwest",source:"https://www.miit.gov.cn/ztzl/rdzt/dsxxjyzl/xxzl/art/2021/art_a43d76bc5e694806889c07fc36ec6adc.html",caption:"遵义会议在长征途中召开，成为中国共产党和红军历史上的重要转折节点。"},
+    {date:"1935.03.28",image:"assets/milestone-04-jialing.svg",title:"红四方面军强渡嘉陵江，开始战略转移",route:"fourth",place:"cangxi",region:"sichuan",source:"https://dangshi.people.com.cn/n1/2016/1010/c85037-28763953.html",caption:"1935年3月28日，红四方面军强渡嘉陵江，开始战略转移。此处定位现代红军渡纪念地参考坐标。"},
+    {date:"1935.06.12—18",image:"assets/milestone-05-maogong.svg",title:"红一、红四方面军先头部队在达维会师，中央红军主力抵达懋功",route:"central",place:"xiaojin",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年6月12日，先头部队在达维会师；6月18日，中央红军主力抵达懋功。两个日期对应不同阶段。"},
+    {date:"1935.09.15—16",image:"assets/milestone-06-yongping.svg",title:"红二十五军抵达永坪；次日与红二十六、红二十七军会师",route:"twentyfive",place:"yanchuan",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"红二十五军于9月15日抵达永坪镇，9月16日与红二十六、红二十七军正式会师。"},
+    {date:"1935.10.19",image:"assets/milestone-07-wuqi.svg",title:"中央红军主力到达吴起镇",route:"central",place:"wuqi",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1935年10月19日，中央红军主力到达陕北吴起镇，中央红军长征的重要阶段由此告一段落。"},
+    {date:"1935.11.19",image:"assets/milestone-08-sangzhi.svg",title:"红二、红六军团从桑植出发",route:"second",place:"sangzhi",region:"southwest",source:"https://www.dswxyjy.org.cn/GB/427277/462086/index.html",caption:"1935年11月19日，红二、红六军团从湖南桑植刘家坪等地出发，开始新的战略转移。"},
+    {date:"1936.06下旬—07.02",image:"assets/milestone-09-ganzi.svg",title:"红二、红六军团抵达甘孜，与红四方面军会合",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/zyhd/4848435.html",caption:"1936年6月下旬至7月2日，红二、红六军团在甘孜地区与红四方面军会合。"},
+    {date:"1936.07.05",image:"assets/milestone-10-formation.svg",title:"红二方面军正式组成",route:"second",place:"ganzi",region:"western",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年7月5日，红二方面军正式组成，部队编制进入新的阶段。"},
+    {date:"1936.10.09",image:"assets/milestone-11-huining.svg",title:"红一、红四方面军在会宁会师",route:"fourth",place:"huining",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月9日，红一、红四方面军在甘肃会宁会师。"},
+    {date:"1936.10.22",image:"assets/milestone-12-jiangtaibao.svg",title:"红一、红二方面军在将台堡会师",route:"second",place:"xiji",region:"shaanxi",source:"https://www.mod.gov.cn/gfbw/gfjy_index/16418522.html",caption:"1936年10月22日，红一、红二方面军在宁夏将台堡会师。会宁与将台堡是两次不同的会师事件。"}
   ];
   const documentaryChapters = [
     {title:"出发：踏上征途",summary:"中央红军与红二十五军从各自出发地启程。不同部队有各自的时间线与行进方向。",start:0,end:1},
@@ -257,6 +257,8 @@
     const captionDate=document.getElementById("geoCaptionDate");
     const captionTitle=document.getElementById("geoCaptionTitle");
     const captionText=document.getElementById("geoCaptionText");
+    const documentaryImage=document.getElementById("geoDocumentaryImage");
+    const documentaryImageCaption=document.getElementById("geoDocumentaryImageCaption");
     const cinemaOpen=document.getElementById("geoCinemaOpen");
     const cinemaOverlay=document.getElementById("geoCinemaOverlay");
     const cinemaMapWrap=document.getElementById("geoCinemaMapWrap");
@@ -268,6 +270,7 @@
     const cinemaDate=document.getElementById("geoCinemaDate");
     const cinemaEvent=document.getElementById("geoCinemaEvent");
     const cinemaText=document.getElementById("geoCinemaText");
+    const cinemaImage=document.getElementById("geoCinemaImage");
     const cinemaProgress=document.getElementById("geoCinemaProgress");
     const cinemaProgressFill=document.getElementById("geoCinemaProgressFill");
     const cinemaEnd=document.getElementById("geoCinemaEnd");
@@ -287,6 +290,7 @@
       if(cinemaDate)cinemaDate.textContent=eventData.date;
       if(cinemaEvent)cinemaEvent.textContent=eventData.title;
       if(cinemaText)cinemaText.textContent=eventData.caption||eventData.title;
+      if(cinemaImage&&eventData.image){cinemaImage.src=eventData.image;cinemaImage.alt=eventData.title+" · 原创历史场景艺术复原";}
       if(cinemaProgress)cinemaProgress.textContent=String(index+1).padStart(2,"0")+" / "+String(timelineEvents.length).padStart(2,"0");
       if(cinemaProgressFill)cinemaProgressFill.style.width=((index+1)/timelineEvents.length*100)+"%";
       if(cinemaEnd)cinemaEnd.hidden=index!==timelineEvents.length-1;
@@ -332,6 +336,8 @@
       if(captionDate)captionDate.textContent=eventData.date;
       if(captionTitle)captionTitle.textContent=eventData.title;
       if(captionText)captionText.textContent=eventData.caption||eventData.title;
+      if(documentaryImage&&eventData.image){documentaryImage.src=eventData.image;documentaryImage.alt=eventData.title+" · 原创历史场景艺术复原";}
+      if(documentaryImageCaption)documentaryImageCaption.textContent=eventData.title+" · 原创历史场景艺术复原（非历史照片）";
       if(chapterSelect)chapterSelect.value=String(chapterIndex);
     };
     const selectTimeline=index=>{
