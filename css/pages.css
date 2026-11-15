@@ -284,3 +284,11 @@
 #geoImmersiveToggle[aria-pressed="true"]{border-color:#e2c18a;background:rgba(198,166,107,.2);color:#fff0d5;box-shadow:0 0 16px rgba(198,166,107,.14)}
 @media(max-width:760px){#longMarchMap.immersive-mode .geo-region.region-current .geo-region-label{font-size:15px}}
 @media(prefers-reduced-motion:reduce){#longMarchMap.immersive-mode{box-shadow:none}}
+
+
+/* V14.7 cinematic map camera and smooth event-to-event focus */
+.geo-terrain-svg{transform:translate3d(var(--map-pan-x,0px),var(--map-pan-y,0px),0) perspective(1400px) rotateX(var(--map-tilt,28deg)) scale(var(--map-scale,1.05));transition:transform 1.15s cubic-bezier(.2,.72,.18,1),filter .5s ease}
+#longMarchMap[data-camera-focus]{box-shadow:inset 0 0 0 1px rgba(226,193,138,.18)}
+#geoCameraReset{border-color:rgba(226,193,138,.55);color:#e6c994}
+@media(max-width:760px){.geo-terrain-svg{transform:translate3d(var(--map-pan-x,0px),var(--map-pan-y,0px),0) perspective(900px) rotateX(var(--map-tilt,28deg)) scale(var(--map-scale,1.05));transition:transform .95s cubic-bezier(.2,.72,.18,1),filter .4s ease}#geoCameraReset{min-height:38px}}
+@media(prefers-reduced-motion:reduce){.geo-terrain-svg{transition:none!important}}
