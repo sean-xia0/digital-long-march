@@ -61,10 +61,10 @@
 
 | 图片 | 摄影者 / 拍摄日期 | 来源 | 许可 | 使用方式 |
 |---|---|---|---|---|
-| 任弼时、周广才两条半截皮带（中国共产党历史展览馆展陈） | N509FZ / 2024-06-20 | https://commons.wikimedia.org/wiki/File:Uneaten_remainders_of_two_belts_during_Long_March_at_MCPC_(20240620094143).jpg | CC BY-SA 4.0 | 原图展示，署名摄影者并链接原始文件与许可 |
-| 哈达铺会议旧址：毛泽东、张闻天住室 | N509FZ / 2026-02-02 | https://commons.wikimedia.org/wiki/File:Former_residence_of_Mao_Zedong_and_Zhang_Wentian_at_Hadapu_(20260202170407).jpg | CC BY-SA 4.0 | 原图展示，署名摄影者并链接原始文件与许可 |
+| 两条半截皮带（中国共产党历史展览馆展陈；展陈说明分别对应任弼时与警卫员李少清、周广才与战友） | N509FZ / 2024-06-20 | https://commons.wikimedia.org/wiki/File:Uneaten_remainders_of_two_belts_during_Long_March_at_MCPC_(20240620094143).jpg | CC BY-SA 4.0 | Commons缩放预览；署名摄影者、原始文件页和许可；不作内容编辑 |
+| 哈达铺会议旧址：毛泽东、张闻天住室（义和昌药铺） | N509FZ / 2026-02-02 | https://commons.wikimedia.org/wiki/File:Former_residence_of_Mao_Zedong_and_Zhang_Wentian_at_Hadapu_(20260202170407).jpg | CC BY-SA 4.0 | Commons缩放预览；署名摄影者、原始文件页和许可；不作内容编辑 |
 
-许可文本：https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans 。两张照片未作裁剪或调色处理。图片说明明确区分“当代实物/旧址摄影”与“历史现场照片”，避免误导。页面直接通过 Wikimedia Commons 文件页加载原图缩放版本；若目标环境无法访问 Commons，图片可能无法显示，后续可在确认离线打包要求后再考虑合规本地化。
+许可文本：https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans 。摄影者主页：https://commons.wikimedia.org/wiki/User:N509FZ 。页面通过 Wikimedia Commons 加载缩放预览，非原始全分辨率文件；本项目未另行裁剪、调色或改动图像内容。图片说明明确区分“当代实物/旧址摄影”与“历史现场照片”。图片仍依赖网络访问 Commons；若比赛要求完全离线，需在保留作者、来源、许可及修改说明的前提下另行合规本地化。
 
 
 ## V13 地图补充说明
