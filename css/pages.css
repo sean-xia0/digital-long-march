@@ -405,3 +405,8 @@ body.geo-cinema-active{overflow:hidden}
  .geo-cinema-art img{aspect-ratio:16/10;max-height:240px}
 }
 @media(prefers-reduced-motion:reduce){.chronicle-art img,.geo-timeline-thumb{transition:none}}
+
+
+/* V15.1 — preserve the complete Commons photograph frame without CSS cropping */
+.artifact-photo-card img{height:auto;max-height:440px;object-fit:contain;background:#171516}
+@media(max-width:760px){.artifact-photo-card img{height:auto;max-height:none;object-fit:contain}}
